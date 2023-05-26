@@ -1,0 +1,50 @@
+.dropdown-wrapper {
+    height: 100%;
+    background: red;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.list-wrapper {
+    background-color: blueviolet;
+    position: absolute;
+    padding: 0.2rem;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.item:not(:last-child) {
+    border-bottom: 2px solid black;
+    margin: 1rem 0;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item:nth-child(3) {
+    display: flex;
+    flex-direction: column;
+}
+
+.tips-wrapper {
+    font-size: 12px;
+}
+
+.item:nth-child(3) > div:nth-child(1) {
+    margin-bottom: 0.5rem;
+}
+
+.tips-wrapper > div {
+    margin-bottom: 0.4rem;
+}
+
+.iq200 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

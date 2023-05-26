@@ -1,0 +1,13 @@
+.nav-wrapper {
+    display: flex;
+    background: black;
+    color: wheat;
+    height: 2rem;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.dropdown {
+    height: 90%;
+    width: 3rem;
+}

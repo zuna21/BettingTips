@@ -1,0 +1,22 @@
+<div class="dropdown-wrapper" (click)="onOpenDropdown()">
+    <app-dropdown-svg></app-dropdown-svg>
+</div>
+<div class="list-wrapper" *ngIf="isDropdownOpen">
+    <div class="item">Home</div>
+    <div class="item">Packages</div>
+    <div class="item" (click)="onOpenTips()">
+        <div class="iq200">
+            <div>
+                <app-down-arrow-svg></app-down-arrow-svg>
+            </div>
+            <div>Tips</div>
+        </div>
+        <div class="tips-wrapper" *ngIf="isTipsOpen">
+            <div>VIP</div>
+            <div>Football</div>
+            <div>Basketball</div>
+        </div>
+    </div>
+    <div class="item">Contact</div>
+    <div class="item">Log out</div>
+</div>
