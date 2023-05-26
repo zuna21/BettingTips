@@ -10,6 +10,7 @@
 .list-wrapper {
     background-color: blueviolet;
     position: absolute;
+    right: 2.5rem;
     padding: 0.2rem;
     border: 2px solid black;
     border-radius: 4px;

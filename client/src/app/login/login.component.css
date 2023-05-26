@@ -1,0 +1,28 @@
+.login-wrapper {
+    background: aliceblue;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background-color: bisque;
+    border: 2px solid tomato;
+    height: 70%;
+    width: 80%;
+    border-radius: 5px;
+    padding: 2rem;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+input {
+    padding-left: 0.5rem;
+}
