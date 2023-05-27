@@ -9,6 +9,8 @@ import { NavDropdownComponent } from './_components/nav-dropdown/nav-dropdown.co
 import { DropdownSvgComponent } from './_components/svg/dropdown-svg/dropdown-svg.component';
 import { DownArrowSvgComponent } from './_components/svg/down-arrow-svg/down-arrow-svg.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { LoginComponent } from './login/login.component';
     NavDropdownComponent,
     DropdownSvgComponent,
     DownArrowSvgComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

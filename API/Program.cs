@@ -32,7 +32,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 
 builder.Services.AddScoped<ITokenService, TokenService>();
-
+builder.Services.AddScoped<ITipRepository, TipRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

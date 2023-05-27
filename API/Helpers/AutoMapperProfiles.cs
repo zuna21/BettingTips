@@ -1,3 +1,5 @@
+using API.DTOs;
+using API.Entities;
 using AutoMapper;
 
 namespace API.Helpers
@@ -6,7 +8,8 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
-
+            CreateMap<TipCreateDto, Tip>();
+            CreateMap<Tip, TipDto>();
         }
     }
 }
