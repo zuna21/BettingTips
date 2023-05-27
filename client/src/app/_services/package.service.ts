@@ -15,4 +15,8 @@ export class PackageService {
   public getAllPackages() {
     return this.http.get<Package[]>(`${this.baseUrl}/package`);
   }
+
+  public getPackageById(id: string) {
+    return this.http.get(`${this.baseUrl}/package/${id}`);
+  }
 }

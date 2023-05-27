@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+import {MatExpansionModule} from '@angular/material/expansion'; 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +16,8 @@ import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PackagesComponent } from './packages/packages.component';
 import { PackageCardComponent } from './_components/package-card/package-card.component';
+import { TipsComponent } from './tips/tips.component';
+import { TipPanelComponent } from './_components/tip-panel/tip-panel.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +30,16 @@ import { PackageCardComponent } from './_components/package-card/package-card.co
     LoginComponent,
     RegisterComponent,
     PackagesComponent,
-    PackageCardComponent
+    PackageCardComponent,
+    TipsComponent,
+    TipPanelComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

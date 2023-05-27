@@ -1,0 +1,10 @@
+<div *ngIf="package$ | async" class="main-container">
+    <div>{{ (package$ | async).name }}</div>
+    <div>
+        <ng-container *ngFor="let tip of (tips$ | async)">
+            <app-tip-panel
+                [tip]="tip"
+            ></app-tip-panel>
+        </ng-container>
+    </div>
+</div>

@@ -12,19 +12,25 @@ namespace API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ITipRepository _tipRepository;
+        private readonly IPackageRepository _packageRepository;
         public TipController(
             IMapper mapper,
-            ITipRepository tipRepository
+            ITipRepository tipRepository,
+            IPackageRepository packageRepository
         )
         {
             _mapper = mapper;
             _tipRepository = tipRepository;
+            _packageRepository = packageRepository;
         }
 
         [HttpPost]
         public async Task<ActionResult<TipDto>> CreateTip(TipCreateDto tipCreateDto)
         {
             var tip = _mapper.Map<Tip>(tipCreateDto);
+            var package = await _packageRepository.FindPackageById(tipCreateDto.PackageId);
+            if (package == null) return NotFound();
+            tip.Package = package;
             _tipRepository.AddTip(tip);
             if (await _tipRepository.SaveAllAsync()) return _mapper.Map<TipDto>(tip);
             return BadRequest("Failed to create tip");
@@ -52,6 +58,14 @@ namespace API.Controllers
 
             if (await _tipRepository.SaveAllAsync()) return NoContent();
             return BadRequest("Failed to make tips inactive.s");
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ICollection<TipDto>>> GetActiveTipsByPackageId(int id)
+        {
+            var tips = await _tipRepository.GetActiveTipsByPackageId(id);
+            if (tips == null) return NotFound();
+            return Ok(_mapper.Map<ICollection<TipDto>>(tips));
         }
 
     }

@@ -12,10 +12,9 @@
             <div>Tips</div>
         </div>
         <div class="tips-wrapper" *ngIf="isTipsOpen">
-            <div>Football</div>
-            <div>Basketball</div>
-            <div>Footbal + Basketball</div>
-            <div>VIP</div>
+            <ng-container *ngFor="let package of (packages$ | async)">
+                <div routerLink="/tips/{{package.id}}">{{ package.name }}</div>
+            </ng-container>
         </div>
     </div>
     <div class="item">Contact</div>

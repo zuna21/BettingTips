@@ -7,6 +7,7 @@ namespace API.Interfaces
         void AddTip(Tip tip);
         void DeleteTip(Tip tip);
         Task<Tip> GetTipById(int id);
+        Task<ICollection<Tip>> GetActiveTipsByPackageId(int id);
         Task<ICollection<Tip>> GetAllActiveTips();
         Task<bool> SaveAllAsync();        
     }

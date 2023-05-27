@@ -25,6 +25,14 @@ namespace API.Data
             _context.Tips.Remove(tip);
         }
 
+        public async Task<ICollection<Tip>> GetActiveTipsByPackageId(int id)
+        {
+            return await _context.Tips
+                .Where(x => x.PackageId == id)
+                .Where(x => x.Status == "active")
+                .ToListAsync();
+        }
+
         public async Task<ICollection<Tip>> GetAllActiveTips()
         {
             return await _context.Tips
