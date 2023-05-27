@@ -10,6 +10,8 @@ namespace API.Helpers
         {
             CreateMap<TipCreateDto, Tip>();
             CreateMap<Tip, TipDto>();
+            CreateMap<PackageCreateDto, Package>();
+            CreateMap<Package, PackageDto>();
         }
     }
 }

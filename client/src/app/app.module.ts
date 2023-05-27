@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,8 @@ import { DownArrowSvgComponent } from './_components/svg/down-arrow-svg/down-arr
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PackagesComponent } from './packages/packages.component';
+import { PackageCardComponent } from './_components/package-card/package-card.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DropdownSvgComponent,
     DownArrowSvgComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PackagesComponent,
+    PackageCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

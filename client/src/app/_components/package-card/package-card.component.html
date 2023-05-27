@@ -1,0 +1,10 @@
+<div class="main-container" *ngIf="package">
+    <div>{{ package.name }}</div>
+    <hr>
+    <div>{{ package.description }}</div>
+    <hr>
+    <div>
+        <div>${{ package.price }}</div>
+        <button type="button">{{"Select" | uppercase}}</button>
+    </div>
+</div>

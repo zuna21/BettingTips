@@ -2,8 +2,8 @@
     <app-dropdown-svg></app-dropdown-svg>
 </div>
 <div class="list-wrapper" *ngIf="isDropdownOpen">
-    <div class="item">Home</div>
-    <div class="item">Packages</div>
+    <div class="item" routerLink="/home">Home</div>
+    <div class="item" routerLink="/packages">Packages</div>
     <div class="item" (click)="onOpenTips()">
         <div class="iq200">
             <div>
