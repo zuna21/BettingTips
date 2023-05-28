@@ -18,9 +18,9 @@ namespace API.Data
              base.OnModelCreating(builder);
 
              builder.Entity<Tip>()
-                .HasOne(x => x.Package)
-                .WithMany(x => x.Tips)
-                .HasForeignKey(x => x.PackageId);
+                .HasMany(m => m.Packages)
+                .WithMany(m => m.Tips)
+                .UsingEntity(j => j.ToTable("PackageTip"));
         }
     }
 }

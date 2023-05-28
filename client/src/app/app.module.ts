@@ -22,6 +22,7 @@ import { TipPanelComponent } from './_components/tip-panel/tip-panel.component';
 import { ContactComponent } from './contact/contact.component';
 import { CreateComponent } from './create/create.component';
 import { CreatePackageComponent } from './create/create-package/create-package.component';
+import { CreateTipComponent } from './create/create-tip/create-tip.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CreatePackageComponent } from './create/create-package/create-package.c
     TipPanelComponent,
     ContactComponent,
     CreateComponent,
-    CreatePackageComponent
+    CreatePackageComponent,
+    CreateTipComponent
   ],
   imports: [
     BrowserModule,

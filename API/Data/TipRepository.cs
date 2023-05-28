@@ -28,8 +28,8 @@ namespace API.Data
         public async Task<ICollection<Tip>> GetActiveTipsByPackageId(int id)
         {
             return await _context.Tips
-                .Where(x => x.PackageId == id)
                 .Where(x => x.Status == "active")
+                .Where(x => x.Packages.Select(y => y.Id).Contains(id))
                 .ToListAsync();
         }
 

@@ -5,8 +5,7 @@ namespace API.Entities
         public int Id { get; set; }
         public string HomeTeam { get; set; }
         public string AwayTeam { get; set; }
-        public int PackageId { get; set; }
-        public Package Package { get; set; }
+        public ICollection<Package> Packages { get; set; }
         public string Status { get; set; } = "active";
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;       
     }
