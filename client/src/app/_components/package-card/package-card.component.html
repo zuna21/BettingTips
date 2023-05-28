@@ -6,5 +6,10 @@
     <div>
         <div>${{ package.price }}</div>
         <button type="button">{{"Select" | uppercase}}</button>
+        <button 
+            *ngIf="canDelete" 
+            type="button"
+            (click)="onDelete()"
+        >{{"Delete" | uppercase}}</button>
     </div>
 </div>

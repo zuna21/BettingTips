@@ -1,0 +1,38 @@
+.main-container {
+    background: darkcyan;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.main-container > div:first-child {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.package-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form > div > div {
+    display: flex;
+    flex-direction: column;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+button {
+    border-radius: 4px;
+    height: 2rem;
+    background: chartreuse;
+    border: 3px solid tomato;
+    font-style: italic;
+}

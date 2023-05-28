@@ -1,0 +1,31 @@
+.main-container {
+    background: darkcyan;
+    height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+.main-container > div:first-child {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.main-container > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+button {
+    height: 3rem;
+    width: 20rem;
+    background: coral;
+    outline: none;
+    border: 4px solid chartreuse;
+    font-style: italic;
+    color: darkmagenta;
+    border-radius: 4px;
+}

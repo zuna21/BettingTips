@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatExpansionModule} from '@angular/material/expansion'; 
 
@@ -18,6 +19,9 @@ import { PackagesComponent } from './packages/packages.component';
 import { PackageCardComponent } from './_components/package-card/package-card.component';
 import { TipsComponent } from './tips/tips.component';
 import { TipPanelComponent } from './_components/tip-panel/tip-panel.component';
+import { ContactComponent } from './contact/contact.component';
+import { CreateComponent } from './create/create.component';
+import { CreatePackageComponent } from './create/create-package/create-package.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +36,17 @@ import { TipPanelComponent } from './_components/tip-panel/tip-panel.component';
     PackagesComponent,
     PackageCardComponent,
     TipsComponent,
-    TipPanelComponent
+    TipPanelComponent,
+    ContactComponent,
+    CreateComponent,
+    CreatePackageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MatExpansionModule
   ],
   providers: [],

@@ -1,0 +1,14 @@
+.main-container {
+    background: darkslategray;
+    height: 100vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-container > div {
+    display: flex;
+    gap: 2rem;
+}

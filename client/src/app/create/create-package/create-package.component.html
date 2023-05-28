@@ -1,0 +1,42 @@
+<div class="main-container">
+    <div>Create Package</div>
+    <div class="package-container">
+        <ng-container *ngFor="let package of (packageService.packages$ | async)">
+            <app-package-card
+                [package]="package"
+                [canDelete]="true"
+                (deletedPackage)="deletedPackage($event)"
+            >
+            </app-package-card>
+        </ng-container>
+    </div>
+        <form [formGroup]="packageForm" (ngSubmit)="onAddNewPackage()">
+            <div>
+                <div>
+                    <label>Name: </label>
+                    <input 
+                        type="text" 
+                        formControlName="name"
+                    />
+                </div>
+                <div>
+                    <label>Description: </label>
+                    <textarea
+                        formControlName="description"
+                    ></textarea>
+                </div>
+                <div>
+                    <label>Price: </label>
+                    <input 
+                        type="number" 
+                        formControlName="price"
+                    />
+                </div>
+                <div>
+                    <button
+                        [disabled]="!packageForm.valid"
+                    >Add</button>
+                </div>
+            </div>
+        </form>
+</div>
