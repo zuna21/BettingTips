@@ -15,7 +15,6 @@ import { DownArrowSvgComponent } from './_components/svg/down-arrow-svg/down-arr
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PackagesComponent } from './packages/packages.component';
 import { PackageCardComponent } from './_components/package-card/package-card.component';
 import { TipsComponent } from './tips/tips.component';
 import { TipPanelComponent } from './_components/tip-panel/tip-panel.component';
@@ -23,6 +22,7 @@ import { ContactComponent } from './contact/contact.component';
 import { CreateComponent } from './create/create.component';
 import { CreatePackageComponent } from './create/create-package/create-package.component';
 import { CreateTipComponent } from './create/create-tip/create-tip.component';
+import { PackageListComponent } from './package-list/package-list.component';
 
 @NgModule({
   declarations: [
@@ -34,14 +34,14 @@ import { CreateTipComponent } from './create/create-tip/create-tip.component';
     DownArrowSvgComponent,
     LoginComponent,
     RegisterComponent,
-    PackagesComponent,
     PackageCardComponent,
     TipsComponent,
     TipPanelComponent,
     ContactComponent,
     CreateComponent,
     CreatePackageComponent,
-    CreateTipComponent
+    CreateTipComponent,
+    PackageListComponent
   ],
   imports: [
     BrowserModule,
