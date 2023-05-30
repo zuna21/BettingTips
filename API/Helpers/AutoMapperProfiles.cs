@@ -12,6 +12,7 @@ namespace API.Helpers
             CreateMap<Tip, TipDto>();
             CreateMap<PackageCreateDto, Package>();
             CreateMap<Package, PackageDto>();
+            CreateMap<PackageDto, Package>();
         }
     }
 }

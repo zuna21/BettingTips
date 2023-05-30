@@ -24,15 +24,6 @@ namespace API.Controllers
             _packageRepository = packageRepository;
         }
 
-        /* [HttpPost]
-        public async Task<ActionResult<TipDto>> CreateTip(TipCreateDto tipCreateDto)
-        {
-            var tip = _mapper.Map<Tip>(tipCreateDto);
-            foreach (var package in tipCreateDto.Packages)
-            {
-                
-            }
-        } */
 
         [HttpGet]
         public async Task<ActionResult<ICollection<TipDto>>> GetAllActiveTips()
@@ -73,6 +64,18 @@ namespace API.Controllers
             var tips = await _tipRepository.GetActiveTipsByPackageId(id);
             if (tips == null) return NotFound();
             return Ok(_mapper.Map<ICollection<TipDto>>(tips));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<TipDto>> CreateTip(TipCreateDto tipCreateDto)
+        {
+            var tip = _mapper.Map<Tip>(tipCreateDto);
+            var packages = await _packageRepository.GetPackagesAsync(tipCreateDto.Packages);
+            if (packages == null) return NotFound();
+            tip.Packages = packages;
+            _tipRepository.AddTip(tip);
+            if (await _tipRepository.SaveAllAsync()) return _mapper.Map<TipDto>(tip);
+            return BadRequest("Failed to create tip.");
         }
     }
 }

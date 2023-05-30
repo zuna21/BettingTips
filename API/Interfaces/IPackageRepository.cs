@@ -1,3 +1,4 @@
+using API.DTOs;
 using API.Entities;
 
 namespace API.Interfaces
@@ -8,6 +9,7 @@ namespace API.Interfaces
         void AddPackage(Package package);
         void DeletePackage(Package package);
         Task<Package> FindPackageById(int id);
+        Task<ICollection<Package>> GetPackagesAsync(ICollection<PackageDto> packageDtos);
         Task<bool> SaveAllAsync();
     }
 }

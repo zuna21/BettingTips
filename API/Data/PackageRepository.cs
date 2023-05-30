@@ -1,3 +1,4 @@
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,13 @@ namespace API.Data
         public async Task<ICollection<Package>> GetAllPackages()
         {
             return await _context.Packages.ToListAsync();
+        }
+
+        public async Task<ICollection<Package>> GetPackagesAsync(ICollection<PackageDto> packageDtos)
+        {
+            return await _context.Packages.Where(
+                m => packageDtos.Select(mi => mi.Id).Contains(m.Id)
+            ).ToListAsync();
         }
 
         public async Task<bool> SaveAllAsync()
