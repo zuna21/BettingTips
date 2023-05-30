@@ -4,5 +4,12 @@
         {{ tip.homeTeam }} - {{ tip.awayTeam }}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <div>Ovdje ce ici ona slika</div>
+    <div class="body-container">
+      <div class="packages-names">
+        <ng-container *ngFor="let package of tip.packages">
+          <div>{{ package.name }}</div>
+        </ng-container>
+      </div>
+      <div>Ovdje ce ici slika neka</div>
+    </div>
   </mat-expansion-panel>

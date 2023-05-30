@@ -15,4 +15,8 @@ export class TipService {
   public getTipsByPackageId(id: string) {
     return this.http.get<Tip[]>(`${this.baseUrl}/tip/${id}`);
   }
+
+  public getAllActiveTips() {
+    return this.http.get<Tip[]>(`${this.baseUrl}/tip`);
+  }
 }

@@ -1,3 +1,56 @@
 .main-container {
-    height: 100vh;
+    background: cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+    gap: 3rem;
+}
+
+.title {
+    font-size: 3rem;
+    font-style: italic;
+}
+
+.tip-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+button {
+    height: 2rem;
+    width: 100%;
+    background: aquamarine;
+    border: 2px solid tomato;
+    border-radius: 4px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.checkbox-container > div {
+    border: 1px solid tomato;
+    padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: antiquewhite;
+    gap: 0.2rem;
+    flex-direction: column;
+    border-radius: 4px;
+}
+
+form > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }

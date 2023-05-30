@@ -1,3 +1,36 @@
 <div class="main-container">
-    
+    <div class="title">Create tip</div>    
+    <button>Make all tips inactive</button>
+    <div class="tip-container">
+        <ng-container *ngFor="let tip of (tips$ | async)">
+            <app-tip-panel
+                [tip]="tip"
+            >
+            </app-tip-panel>
+        </ng-container>
+    </div>
+    <form>
+        <div>
+            <div class="input-container">
+                <label>Home Team: </label>
+                <input type="text" />
+            </div>
+            <div class="input-container">
+                <label>Away Team: </label>
+                <input type="text" />
+            </div>
+            <div class="checkbox-container">
+                <ng-container
+                    *ngFor="let package of (packageService.packages$ | async)"
+                >
+                    <div>
+                        <label>{{package.name}}</label>
+                        <input 
+                            (click)="onCheckPackage($event, package)"
+                            type="checkbox">
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </form>
 </div>

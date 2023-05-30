@@ -5,6 +5,7 @@ namespace API.DTOs
         public int Id { get; set; }
         public string HomeTeam { get; set; }
         public string AwayTeam { get; set; }
+        public ICollection<PackageDto> Packages { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;   
     }
 }
