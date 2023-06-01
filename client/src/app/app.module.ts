@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatExpansionModule} from '@angular/material/expansion'; 
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { CreateComponent } from './create/create.component';
 import { CreatePackageComponent } from './create/create-package/create-package.component';
 import { CreateTipComponent } from './create/create-tip/create-tip.component';
 import { PackageListComponent } from './package-list/package-list.component';
+import { FileUploaderComponent } from './_components/file-uploader/file-uploader.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { PackageListComponent } from './package-list/package-list.component';
     CreateComponent,
     CreatePackageComponent,
     CreateTipComponent,
-    PackageListComponent
+    PackageListComponent,
+    FileUploaderComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { PackageListComponent } from './package-list/package-list.component';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

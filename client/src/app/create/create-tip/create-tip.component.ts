@@ -3,8 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, take } from 'rxjs';
 import { Package } from 'src/app/_interfaces/package';
 import { Tip } from 'src/app/_interfaces/tip';
+import { TipCreate } from 'src/app/_interfaces/tipCreate';
 import { PackageService } from 'src/app/_services/package.service';
 import { TipService } from 'src/app/_services/tip.service';
+
+const URL = 'htadkfjas;df';
 
 @Component({
   selector: 'app-create-tip',
@@ -15,6 +18,13 @@ export class CreateTipComponent implements OnInit {
   private tips = new BehaviorSubject<Tip[]>([]);
   tips$ = this.tips.asObservable();
   createTipForm: FormGroup;
+  selectedPackages: Package[] = [];
+  tipToCreate: TipCreate = {
+    homeTeam: '',
+    awayTeam: '',
+    packages: []
+  }
+
 
   constructor(
     private tipService: TipService,
@@ -32,13 +42,16 @@ export class CreateTipComponent implements OnInit {
   initializeForm() {
     this.createTipForm = this.fb.group({
       homeTeam: ['', Validators.required],
-      awayTeam: ['', Validators.required],
-      packages: this.fb.array([])
+      awayTeam: ['', Validators.required]
     });
   }
 
   private setTips(newTips: Tip[]) {
     this.tips.next(newTips)
+  }
+
+  private getTips() {
+    return this.tips.getValue();
   }
 
   loadTips() {
@@ -49,8 +62,42 @@ export class CreateTipComponent implements OnInit {
   }
 
   onCheckPackage(e, selectedPackage: Package) {
-    console.log(e.target.checked);
-    console.log(selectedPackage);
+    const isChecked: boolean = e.target.checked;
+    if (isChecked) 
+      this.selectedPackages.push(selectedPackage);
+    else 
+      this.selectedPackages.splice(
+        this.selectedPackages.indexOf(selectedPackage), 1
+      );
+    
+    this.tipToCreate.packages = [...this.selectedPackages];
+  }
+
+  onSubmitForm() {
+    if (this.selectedPackages.length === 0) return;
+    if (this.createTipForm.invalid) return;
+    this.tipToCreate.homeTeam = this.createTipForm.get('homeTeam').value;
+    this.tipToCreate.awayTeam = this.createTipForm.get('awayTeam').value;
+    this.tipService.createTip(this.tipToCreate).pipe(take(1))
+      .subscribe({
+        next: newTip => {
+          const currentTips: Tip[] = this.getTips();
+          const updatedTips: Tip[] = [...currentTips, newTip];
+          this.setTips(updatedTips);
+          this.createTipForm.reset();
+        }
+      });
+  }
+
+  onMakeTipsInactive() {
+    const currentTips = this.getTips();
+    if (currentTips.length === 0) return;
+    this.tipService.makeTipsInactive().pipe(take(1))
+      .subscribe({
+        next: _ => {
+          this.setTips([]);
+        }
+      });
   }
 
 }

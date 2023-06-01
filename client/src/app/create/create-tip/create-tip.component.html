@@ -1,6 +1,6 @@
 <div class="main-container">
     <div class="title">Create tip</div>    
-    <button>Make all tips inactive</button>
+    <button [disabled]="(tips$ | async).length === 0" (click)="onMakeTipsInactive()">Make all tips inactive</button>
     <div class="tip-container">
         <ng-container *ngFor="let tip of (tips$ | async)">
             <app-tip-panel
@@ -9,15 +9,15 @@
             </app-tip-panel>
         </ng-container>
     </div>
-    <form>
+    <form [formGroup]="createTipForm" (ngSubmit)="onSubmitForm()">
         <div>
             <div class="input-container">
                 <label>Home Team: </label>
-                <input type="text" />
+                <input type="text" formControlName="homeTeam"/>
             </div>
             <div class="input-container">
                 <label>Away Team: </label>
-                <input type="text" />
+                <input type="text" formControlName="awayTeam" />
             </div>
             <div class="checkbox-container">
                 <ng-container
@@ -31,6 +31,12 @@
                     </div>
                 </ng-container>
             </div>
+            
+            <app-file-uploader></app-file-uploader>
+
+            <button
+                [disabled]="createTipForm.invalid || selectedPackages.length === 0"
+            >Create tip</button>
         </div>
     </form>
 </div>
