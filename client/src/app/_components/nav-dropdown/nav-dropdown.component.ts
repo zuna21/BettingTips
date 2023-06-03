@@ -1,5 +1,7 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { AccountService } from 'src/app/_services/account.service';
 import { PackageService } from 'src/app/_services/package.service';
 
 @Component({
@@ -10,6 +12,8 @@ import { PackageService } from 'src/app/_services/package.service';
 export class NavDropdownComponent implements OnInit {
   isTipsOpen: boolean = false;
   isDropdownOpen: boolean = false;
+  private accountService: AccountService = inject(AccountService);
+  private router: Router = inject(Router);
 
 
   constructor(
@@ -44,5 +48,11 @@ export class NavDropdownComponent implements OnInit {
      this.isDropdownOpen = false;
      this.isTipsOpen = false;
      }
+  }
+
+  onLogOut() {
+    this.accountService.setUser(null);
+    this.accountService.setUserToLocalStorage(null);
+    this.router.navigateByUrl('/login');
   }
 }

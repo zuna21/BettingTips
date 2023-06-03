@@ -9,18 +9,24 @@ import { CreateComponent } from './create/create.component';
 import { CreatePackageComponent } from './create/create-package/create-package.component';
 import { CreateTipComponent } from './create/create-tip/create-tip.component';
 import { PackageListComponent } from './package-list/package-list.component';
+import { authGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '', pathMatch: 'full', redirectTo: '/home'},
+  {
+    path: '', 
+    canActivate: [authGuard()],
+    children: [
+      {path: 'home', component: HomeComponent},
+      {path: 'tips/:id', component: TipsComponent},
+      {path: 'contact', component: ContactComponent},
+      {path: 'create', component: CreateComponent},
+      {path: 'create-package', component: CreatePackageComponent},
+      {path: 'create-tip', component: CreateTipComponent},
+      {path: 'package-list', component: PackageListComponent}
+  ]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'tips/:id', component: TipsComponent},
-  {path: 'contact', component: ContactComponent},
-  {path: 'create', component: CreateComponent},
-  {path: 'create-package', component: CreatePackageComponent},
-  {path: 'create-tip', component: CreateTipComponent},
-  {path: 'package-list', component: PackageListComponent}
 ];
 
 @NgModule({
