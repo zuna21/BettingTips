@@ -23,7 +23,8 @@ export class CreateTipComponent implements OnInit {
     homeTeam: '',
     awayTeam: '',
     packages: []
-  }
+  };
+  selectedFile: File | null = null;
 
 
   constructor(
@@ -42,7 +43,8 @@ export class CreateTipComponent implements OnInit {
   initializeForm() {
     this.createTipForm = this.fb.group({
       homeTeam: ['', Validators.required],
-      awayTeam: ['', Validators.required]
+      awayTeam: ['', Validators.required],
+      photo: [null]
     });
   }
 
@@ -99,5 +101,19 @@ export class CreateTipComponent implements OnInit {
         }
       });
   }
+
+
+ selectFileToUpload(event) {  
+     this.selectedFile = event.target.files[0];
+ }  
+
+ uploadFile() {
+    if (!this.selectedFile) return;
+    const formData = new FormData();
+    formData.append('photo', this.selectedFile);
+    this.tipService.createPhoto(formData)
+      .pipe(take(1))
+      .subscribe({next: response => console.log(response)});
+ }
 
 }

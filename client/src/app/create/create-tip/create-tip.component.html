@@ -9,7 +9,7 @@
             </app-tip-panel>
         </ng-container>
     </div>
-    <form [formGroup]="createTipForm" (ngSubmit)="onSubmitForm()">
+    <form [formGroup]="createTipForm" (ngSubmit)="onSubmitForm()" enctype="multipart/form-data">
         <div>
             <div class="input-container">
                 <label>Home Team: </label>
@@ -31,12 +31,16 @@
                     </div>
                 </ng-container>
             </div>
-            
-            <app-file-uploader></app-file-uploader>
 
             <button
                 [disabled]="createTipForm.invalid || selectedPackages.length === 0"
             >Create tip</button>
         </div>
     </form>
+
+    <div class="image-upload-container">
+        <label>Insert your image: </label>
+        <input type="file" (change)="selectFileToUpload($event)">
+        <button (click)="uploadFile()">Upload your image</button>
+    </div>
 </div>

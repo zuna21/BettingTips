@@ -54,3 +54,7 @@ form > div:first-child {
     flex-direction: column;
     gap: 0.5rem;
 }
+
+.image-upload-container {
+    display: flex;
+}

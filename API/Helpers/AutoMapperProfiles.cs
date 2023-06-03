@@ -13,6 +13,8 @@ namespace API.Helpers
             CreateMap<PackageCreateDto, Package>();
             CreateMap<Package, PackageDto>();
             CreateMap<PackageDto, Package>();
+            CreateMap<PhotoCreateDto, Photo>();
+            CreateMap<Photo, PhotoDto>();
         }
     }
 }

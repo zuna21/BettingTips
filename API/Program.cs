@@ -34,6 +34,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ITipRepository, TipRepository>();
 builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -46,6 +47,7 @@ app.UseCors(x => x.AllowAnyHeader()
     .AllowCredentials()
     .WithOrigins("http://localhost:4200"));
 
+app.UseStaticFiles();
 
 app.MapControllers();
 
