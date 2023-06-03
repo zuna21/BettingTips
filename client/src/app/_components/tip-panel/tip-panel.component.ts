@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Tip } from 'src/app/_interfaces/tip';
 
 @Component({
@@ -6,7 +6,11 @@ import { Tip } from 'src/app/_interfaces/tip';
   templateUrl: './tip-panel.component.html',
   styleUrls: ['./tip-panel.component.css']
 })
-export class TipPanelComponent {
+export class TipPanelComponent implements OnInit {
   @Input() tip: Tip | undefined;
 
+
+  ngOnInit(): void {
+    console.log(this.tip);
+  }
 }

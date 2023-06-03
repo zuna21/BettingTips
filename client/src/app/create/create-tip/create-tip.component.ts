@@ -22,7 +22,8 @@ export class CreateTipComponent implements OnInit {
   tipToCreate: TipCreate = {
     homeTeam: '',
     awayTeam: '',
-    packages: []
+    packages: [],
+    photo: null
   };
   selectedFile: File | null = null;
 
@@ -78,6 +79,7 @@ export class CreateTipComponent implements OnInit {
   onSubmitForm() {
     if (this.selectedPackages.length === 0) return;
     if (this.createTipForm.invalid) return;
+    if (!this.tipToCreate.photo) return;
     this.tipToCreate.homeTeam = this.createTipForm.get('homeTeam').value;
     this.tipToCreate.awayTeam = this.createTipForm.get('awayTeam').value;
     this.tipService.createTip(this.tipToCreate).pipe(take(1))
@@ -113,7 +115,7 @@ export class CreateTipComponent implements OnInit {
     formData.append('photo', this.selectedFile);
     this.tipService.createPhoto(formData)
       .pipe(take(1))
-      .subscribe({next: response => console.log(response)});
+      .subscribe({next: response => this.tipToCreate.photo = response});
  }
 
 }

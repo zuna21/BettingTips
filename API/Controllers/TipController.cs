@@ -13,15 +13,18 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly ITipRepository _tipRepository;
         private readonly IPackageRepository _packageRepository;
+        private readonly IPhotoRepository _photoRepository;
         public TipController(
             IMapper mapper,
             ITipRepository tipRepository,
-            IPackageRepository packageRepository
+            IPackageRepository packageRepository,
+            IPhotoRepository photoRepository
         )
         {
             _mapper = mapper;
             _tipRepository = tipRepository;
             _packageRepository = packageRepository;
+            _photoRepository = photoRepository;
         }
 
 
@@ -72,6 +75,9 @@ namespace API.Controllers
             var tip = _mapper.Map<Tip>(tipCreateDto);
             var packages = await _packageRepository.GetPackagesAsync(tipCreateDto.Packages);
             if (packages == null) return NotFound();
+            var photo = await _photoRepository.GetPhotoById(tipCreateDto.Photo.Id);
+            if (photo == null) return NotFound();
+            tip.Photo = photo;
             tip.Packages = packages;
             _tipRepository.AddTip(tip);
             if (await _tipRepository.SaveAllAsync()) return _mapper.Map<TipDto>(tip);

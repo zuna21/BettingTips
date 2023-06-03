@@ -31,6 +31,7 @@ namespace API.Data
                 .Where(x => x.Status == "active")
                 .Where(x => x.Packages.Select(y => y.Id).Contains(id))
                 .Include(x => x.Packages)
+                .Include(x => x.Photo)
                 .ToListAsync();
         }
 
@@ -39,6 +40,7 @@ namespace API.Data
             return await _context.Tips
                 .Where(x => x.Status == "active")
                 .Include(x => x.Packages)
+                .Include(x => x.Photo)
                 .ToListAsync();
         }
 

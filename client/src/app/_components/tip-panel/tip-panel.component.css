@@ -23,3 +23,8 @@
     padding: 0.4rem;
     background: aliceblue;
 }
+
+.tip-photo {
+    width: 100%;
+    height: auto;
+}
