@@ -7,5 +7,6 @@ namespace API.Entities
         public string Description { get; set; }
         public double Price { get; set; }       
         public ICollection<Tip> Tips { get; set; }
+        public ICollection<AppUser> Users { get; set; }
     }
 }

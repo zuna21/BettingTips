@@ -18,6 +18,11 @@ namespace API.Data
         {
              base.OnModelCreating(builder);
 
+             builder.Entity<AppUser>()
+                .HasOne(x => x.Package)
+                .WithMany(x => x.Users)
+                .HasForeignKey(x => x.PackageId);
+
              builder.Entity<Tip>()
                 .HasMany(m => m.Packages)
                 .WithMany(m => m.Tips)
