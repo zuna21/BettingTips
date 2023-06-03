@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { UserLogin } from '../_interfaces/userLogin';
 import { User } from '../_interfaces/user';
 import { BehaviorSubject } from 'rxjs';
+import { UserCreate } from '../_interfaces/userCreate';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,9 @@ export class AccountService {
 
   login(userLogin: UserLogin) {
     return this.http.post<User>(`${this.baseUrl}/account/login`, userLogin);
+  }
+
+  register(userCreate: UserCreate) {
+    return this.http.post<User>(`${this.baseUrl}/account/register`, userCreate);
   }
 }
