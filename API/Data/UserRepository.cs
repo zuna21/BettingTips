@@ -18,9 +18,19 @@ namespace API.Data
             _context.Users.Add(user);
         }
 
+        public async Task<ICollection<AppUser>> GetAllUnsubscriptionUsers()
+        {
+            return await _context.Users
+                .Where(x => x.HasSubscription == false)
+                .Include(x => x.Package)
+                .ToListAsync();
+        }
+
         public async Task<AppUser> GetUserByUsername(string username)
         {
-            return await _context.Users.FirstOrDefaultAsync(x => x.UserName == username.ToLower());
+            return await _context.Users
+                .Include(x => x.Package)
+                .FirstOrDefaultAsync(x => x.UserName == username.ToLower());
         }
 
         public async Task<bool> IsUsernameTaken(AppUser user)

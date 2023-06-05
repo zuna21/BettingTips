@@ -24,6 +24,8 @@ import { CreateComponent } from './create/create.component';
 import { CreatePackageComponent } from './create/create-package/create-package.component';
 import { CreateTipComponent } from './create/create-tip/create-tip.component';
 import { PackageListComponent } from './package-list/package-list.component';
+import { UsersComponent } from './users/users.component';
+import { UserCardComponent } from './_components/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { PackageListComponent } from './package-list/package-list.component';
     CreatePackageComponent,
     CreateTipComponent,
     PackageListComponent,
+    UsersComponent,
+    UserCardComponent,
   ],
   imports: [
     BrowserModule,

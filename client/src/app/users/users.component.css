@@ -1,0 +1,21 @@
+.main-container {
+    background: cadetblue;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 4rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.users-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

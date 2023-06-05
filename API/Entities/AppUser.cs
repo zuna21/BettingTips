@@ -11,6 +11,9 @@ namespace API.Entities
         public bool IsAdmin { get; set; } = false;
         public int PackageId { get; set; }
         public Package Package { get; set; }
+        public bool HasSubscription { get; set; } = false;
+        public DateTime? StartDate { get; set;}
+        public DateTime? EndDate { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;        
     }
 }

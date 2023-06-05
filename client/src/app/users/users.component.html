@@ -1,0 +1,11 @@
+<div class="main-container">
+    <div class="title">Users</div>
+    <div class="users-container">
+        <ng-container *ngFor="let user of (unsubscriptionUsers$ | async)">
+            <app-user-card
+                (approvedUser)="upprovedUser($event)"
+                [user]="user"
+            ></app-user-card>
+        </ng-container>
+    </div>
+</div>

@@ -10,6 +10,7 @@ import { CreatePackageComponent } from './create/create-package/create-package.c
 import { CreateTipComponent } from './create/create-tip/create-tip.component';
 import { PackageListComponent } from './package-list/package-list.component';
 import { authGuard } from './_guards/auth.guard';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/home'},
@@ -23,7 +24,8 @@ const routes: Routes = [
       {path: 'create', component: CreateComponent},
       {path: 'create-package', component: CreatePackageComponent},
       {path: 'create-tip', component: CreateTipComponent},
-      {path: 'package-list', component: PackageListComponent}
+      {path: 'package-list', component: PackageListComponent},
+      {path: 'users', component: UsersComponent}
   ]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

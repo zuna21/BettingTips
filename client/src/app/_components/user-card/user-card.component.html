@@ -1,0 +1,13 @@
+<div *ngIf="user" class="main-container">
+    <div>
+        <div>{{ user.username }}</div>
+        <div class="email">{{ user.email }}</div>
+    </div>
+    <div>
+        <div>{{ user.package.name }}</div>
+        <div>${{ user.package.price }}</div>
+    </div>
+    <div>
+        <button (click)="onApproveUser()">Approve</button>
+    </div>
+</div>
