@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
+import { Package } from 'src/app/_interfaces/package';
 import { AccountService } from 'src/app/_services/account.service';
 import { PackageService } from 'src/app/_services/package.service';
 
@@ -10,19 +11,22 @@ import { PackageService } from 'src/app/_services/package.service';
   styleUrls: ['./nav-dropdown.component.css']
 })
 export class NavDropdownComponent implements OnInit {
+  private router: Router = inject(Router);
+  private packageService: PackageService = inject(PackageService);
+  public accountService: AccountService = inject(AccountService);
+
+  private userPackages = new BehaviorSubject<Package[]>([]);
+  userPackages$ = this.userPackages.asObservable();
   isTipsOpen: boolean = false;
   isDropdownOpen: boolean = false;
-  public accountService: AccountService = inject(AccountService);
-  private router: Router = inject(Router);
+
 
 
   constructor(
     private elementRef: ElementRef,
-    public packageService: PackageService
   ) {}
 
   ngOnInit(): void {
-    console.log('Sad Se loaduje');
     this.loadPackages();
   }
 
@@ -30,7 +34,7 @@ export class NavDropdownComponent implements OnInit {
     this.packageService.getUserPackages()
       .pipe(take(1))
       .subscribe({
-        next: packages => this.packageService.setPackages(packages)
+        next: packages => this.userPackages.next(packages)
       });
   }
 

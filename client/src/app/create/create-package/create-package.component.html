@@ -1,7 +1,7 @@
 <div class="main-container">
     <div>Create Package</div>
     <div class="package-container">
-        <ng-container *ngFor="let package of (packageService.packages$ | async)">
+        <ng-container *ngFor="let package of (packageService.allPackages$ | async)">
             <app-package-card
                 [package]="package"
                 [canDelete]="true"

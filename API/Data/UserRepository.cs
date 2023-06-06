@@ -21,7 +21,7 @@ namespace API.Data
         public async Task<ICollection<AppUser>> GetAllUnsubscriptionUsers()
         {
             return await _context.Users
-                .Where(x => x.HasSubscription == false)
+                .Where(x => x.HasSubscription == false && x.IsAdmin == false)
                 .Include(x => x.Package)
                 .ToListAsync();
         }

@@ -12,7 +12,7 @@
             <div>Tips</div>
         </div>
         <div class="tips-wrapper" *ngIf="isTipsOpen">
-            <ng-container *ngFor="let package of (packageService.packages$ | async)">
+            <ng-container *ngFor="let package of (userPackages$ | async)">
                 <div routerLink="/tips/{{package.id}}">{{ package.name }}</div>
             </ng-container>
         </div>

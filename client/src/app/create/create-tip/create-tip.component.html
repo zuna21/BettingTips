@@ -27,7 +27,7 @@
             </div>
             <div class="checkbox-container">
                 <ng-container
-                    *ngFor="let package of (packageService.packages$ | async)"
+                    *ngFor="let package of (packageService.allPackages$ | async)"
                 >
                     <div>
                         <label>{{package.name}}</label>

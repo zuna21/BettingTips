@@ -9,19 +9,19 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PackageService {
   private baseUrl: string = 'https://localhost:5001/api';
-  private packages = new BehaviorSubject<Package[]>([]);
-  packages$ = this.packages.asObservable()
+  private allPackages = new BehaviorSubject<Package[]>([]);
+  allPackages$ = this.allPackages.asObservable();
 
   constructor(
     private http: HttpClient
   ) { }
 
-  public setPackages(newPackages: Package[]) {
-    this.packages.next(newPackages);
+  public setAllPackages(allPackages: Package[]) {
+    this.allPackages.next(allPackages);
   }
 
-  public getPackagesStore() {
-    return this.packages.getValue();
+  public getAllPackagesCurrentValue() {
+    return this.allPackages.getValue();
   }
 
   public getAllPackages() {

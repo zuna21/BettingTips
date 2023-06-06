@@ -1,7 +1,7 @@
 <div class="main-container">
     <div>Packages</div>
     <div>
-        <ng-container *ngFor="let package of (packageService.packages$ | async)">
+        <ng-container *ngFor="let package of (packageService.allPackages$ | async)">
             <app-package-card
                 [package]="package"
             ></app-package-card>

@@ -34,7 +34,7 @@ export class CreatePackageComponent implements OnInit {
   loadPackages() {
     this.packageService.getAllPackages().pipe(take(1))
       .subscribe({
-        next: packages => this.packageService.setPackages(packages)
+        next: packages => this.packageService.setAllPackages(packages)
       });
   }
 
@@ -50,16 +50,16 @@ export class CreatePackageComponent implements OnInit {
   }
 
   updatePackages(currentPackage: Package) {
-    const currentPackages = this.packageService.getPackagesStore();
+    const currentPackages = this.packageService.getAllPackagesCurrentValue();
     const updatedPackages = [...currentPackages, currentPackage];
-    this.packageService.setPackages(updatedPackages);
+    this.packageService.setAllPackages(updatedPackages);
   }
 
   deletedPackage(packageToDelete: Package) {
     this.packageService.deletePackage(packageToDelete.id).pipe(take(1)).subscribe();
-    const currentPackages = this.packageService.getPackagesStore();
+    const currentPackages = this.packageService.getAllPackagesCurrentValue();
     const updatedPackages = currentPackages.filter(x => x.id !== packageToDelete.id);
-    this.packageService.setPackages(updatedPackages);
+    this.packageService.setAllPackages(updatedPackages);
   }
 
 }

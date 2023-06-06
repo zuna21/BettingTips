@@ -5,7 +5,7 @@
     <div class="title">
         Betting Tips
     </div>
-    <div class="dropdown">
+    <div class="dropdown" *ngIf="(accountService.user$ | async)">
         <app-nav-dropdown></app-nav-dropdown>
     </div>
 </div>

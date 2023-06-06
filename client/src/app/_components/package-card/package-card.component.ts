@@ -14,4 +14,8 @@ export class PackageCardComponent {
   onDelete() {
     this.deletedPackage.emit(this.package);
   }
+
+  onSelect() {
+    console.log(this.package);
+  }
 }
