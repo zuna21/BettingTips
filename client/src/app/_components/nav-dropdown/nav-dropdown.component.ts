@@ -22,11 +22,12 @@ export class NavDropdownComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('Sad Se loaduje');
     this.loadPackages();
   }
 
   loadPackages() {
-    this.packageService.getAllPackages()
+    this.packageService.getUserPackages()
       .pipe(take(1))
       .subscribe({
         next: packages => this.packageService.setPackages(packages)

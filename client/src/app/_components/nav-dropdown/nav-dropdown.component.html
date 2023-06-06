@@ -1,7 +1,7 @@
 <div class="dropdown-wrapper" (click)="onOpenDropdown()">
     <app-dropdown-svg></app-dropdown-svg>
 </div>
-<div class="list-wrapper" *ngIf="isDropdownOpen">
+<div class="list-wrapper" *ngIf="isDropdownOpen && (accountService.user$ | async)">
     <div class="item" routerLink="/home">Home</div>
     <div class="item" routerLink="/package-list">Packages</div>
     <div class="item" (click)="onOpenTips()">

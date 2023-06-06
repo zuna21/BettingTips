@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatExpansionModule} from '@angular/material/expansion'; 
@@ -27,6 +27,7 @@ import { PackageListComponent } from './package-list/package-list.component';
 import { UsersComponent } from './users/users.component';
 import { UserCardComponent } from './_components/user-card/user-card.component';
 import { WaitingComponent } from './waiting/waiting.component';
+import { AuthInterceptor } from './_interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,9 @@ import { WaitingComponent } from './waiting/waiting.component';
     MatExpansionModule,
     FileUploadModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

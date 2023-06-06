@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     if (this.loginForm.invalid) return;
-    console.log(this.loginForm.value);
     this.accountService.login(this.loginForm.value).pipe(take(1))
       .subscribe({
         next: user => {

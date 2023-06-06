@@ -28,6 +28,10 @@ export class PackageService {
     return this.http.get<Package[]>(`${this.baseUrl}/package`);
   }
 
+  public getUserPackages() {
+    return this.http.get<Package[]>(`${this.baseUrl}/package/getUserPackages`);
+  }
+
   public getPackageById(id: string) {
     return this.http.get(`${this.baseUrl}/package/${id}`);
   }

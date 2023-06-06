@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
@@ -12,13 +13,16 @@ namespace API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IPackageRepository _packageRepository;
+        private readonly IUserRepository _userRepository;
         public PackageController(
             IMapper mapper,
-            IPackageRepository packageRepository
+            IPackageRepository packageRepository,
+            IUserRepository userRepository
         )
         {
             _mapper = mapper;
             _packageRepository = packageRepository;
+            _userRepository = userRepository;
         }
 
         [HttpPost]
@@ -54,6 +58,26 @@ namespace API.Controllers
             var package = await _packageRepository.FindPackageById(id);
             if (package == null) return NotFound();
             return _mapper.Map<PackageDto>(package);
+        }
+
+
+        [HttpGet("getUserPackages")]
+        public async Task<ActionResult<ICollection<PackageDto>>> GetUserPackages()
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (username == null) return Unauthorized();
+            var user = await _userRepository.GetUserByUsername(username);
+            if (user == null) return NotFound();
+            if (user.IsAdmin) 
+            {
+                var adminPackages = await _packageRepository.GetAllPackages();
+                if (adminPackages == null) return NotFound();
+                return Ok(_mapper.Map<ICollection<PackageDto>>(adminPackages));
+            }
+            var packages = new List<Package>{};
+            packages.Add(user.Package);
+            return Ok(_mapper.Map<ICollection<PackageDto>>(packages));
+
         }
     }
 }
