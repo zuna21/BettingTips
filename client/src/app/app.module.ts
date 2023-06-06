@@ -26,6 +26,7 @@ import { CreateTipComponent } from './create/create-tip/create-tip.component';
 import { PackageListComponent } from './package-list/package-list.component';
 import { UsersComponent } from './users/users.component';
 import { UserCardComponent } from './_components/user-card/user-card.component';
+import { WaitingComponent } from './waiting/waiting.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { UserCardComponent } from './_components/user-card/user-card.component';
     PackageListComponent,
     UsersComponent,
     UserCardComponent,
+    WaitingComponent,
   ],
   imports: [
     BrowserModule,

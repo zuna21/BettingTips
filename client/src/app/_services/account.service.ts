@@ -26,14 +26,7 @@ export class AccountService {
   }
 
   setUserToLocalStorage(settingUser: User | null) {
-    if (!settingUser) localStorage.removeItem('user');
-    else {
-      const userToSet = {
-        username: settingUser.username,
-        email: settingUser.email
-      }
-      localStorage.setItem('user', JSON.stringify(userToSet));
-    }
+    localStorage.setItem('user', JSON.stringify(settingUser));
   }
 
   login(userLogin: UserLogin) {

@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="item" routerLink="/contact">Contact</div>
-    <div class="item" routerLink="/create">Create</div>
-    <div class="item" routerLink="/users">Users</div>
+    <div class="item" *ngIf="(accountService.user$ | async).isAdmin" routerLink="/admin/create">Create</div>
+    <div class="item" *ngIf="(accountService.user$ | async).isAdmin" routerLink="/admin">Users</div>
     <div class="item" (click)="onLogOut()">Log out</div>
 </div>

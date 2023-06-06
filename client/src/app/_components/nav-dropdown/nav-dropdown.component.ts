@@ -12,7 +12,7 @@ import { PackageService } from 'src/app/_services/package.service';
 export class NavDropdownComponent implements OnInit {
   isTipsOpen: boolean = false;
   isDropdownOpen: boolean = false;
-  private accountService: AccountService = inject(AccountService);
+  public accountService: AccountService = inject(AccountService);
   private router: Router = inject(Router);
 
 
@@ -52,7 +52,7 @@ export class NavDropdownComponent implements OnInit {
 
   onLogOut() {
     this.accountService.setUser(null);
-    this.accountService.setUserToLocalStorage(null);
+    localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
   }
 }

@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
         next: user => {
           this.accountService.setUser(user);
           this.accountService.setUserToLocalStorage(user);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/waiting');
         }
       })
   }
