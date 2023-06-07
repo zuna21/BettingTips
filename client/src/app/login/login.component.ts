@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: user => {
           this.accountService.setUser(user);
-          this.accountService.setUserToLocalStorage(user);
+          localStorage.setItem('userToken', JSON.stringify(user.token));
+          if (user.isAdmin) localStorage.setItem('isAdmin', JSON.stringify(user.isAdmin));
           this.router.navigateByUrl('/waiting');
         }
       });

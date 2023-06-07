@@ -57,7 +57,7 @@ export class NavDropdownComponent implements OnInit {
 
   onLogOut() {
     this.accountService.setUser(null);
-    localStorage.removeItem('user');
+    localStorage.clear();
     this.router.navigateByUrl('/login');
   }
 }

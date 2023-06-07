@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
       .subscribe({
         next: user => {
           this.accountService.setUser(user);
-          this.accountService.setUserToLocalStorage(user);
+          localStorage.setItem('userToken', JSON.stringify(user.token));
           this.router.navigateByUrl('/waiting');
         }
       })

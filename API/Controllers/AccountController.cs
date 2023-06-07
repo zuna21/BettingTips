@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using API.DTOs;
@@ -86,6 +87,15 @@ namespace API.Controllers
             var userToReturn = _mapper.Map<UserDto>(user);
             userToReturn.Token = _tokenService.CreateToken(user);
             return userToReturn;
+        }
+
+        [HttpGet("getUserByToken")]
+        public async Task<ActionResult<UserDto>> GetUserByToken()
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepository.GetUserByUsername(username);
+            if (user == null) return NotFound();
+            return _mapper.Map<UserDto>(user);
         }
 
         

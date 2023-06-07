@@ -25,15 +25,15 @@ export class AccountService {
     return this.user.getValue();
   }
 
-  setUserToLocalStorage(settingUser: User | null) {
-    localStorage.setItem('user', JSON.stringify(settingUser));
-  }
-
   login(userLogin: UserLogin) {
     return this.http.post<User>(`${this.baseUrl}/account/login`, userLogin);
   }
 
   register(userCreate: UserCreate) {
     return this.http.post<User>(`${this.baseUrl}/account/register`, userCreate);
+  }
+
+  getUserByToken() {
+    return this.http.get<User>(`${this.baseUrl}/account/getUserByToken`);
   }
 }

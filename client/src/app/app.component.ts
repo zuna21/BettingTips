@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AccountService } from './_services/account.service';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +11,24 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   private accountService: AccountService = inject(AccountService);
   private router: Router = inject(Router);
-  title = 'client';
 
   ngOnInit(): void {
-    this.userLogedIn();
+    this.loginUser();
   }
 
-  userLogedIn() {
-    if (localStorage.getItem('user')){
-      const currentUser = JSON.parse(localStorage.getItem('user'));
-      this.accountService.setUserToLocalStorage(currentUser);
-      this.accountService.setUser(currentUser);
-    } else {
+  loginUser() {
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+    if (!userToken) {
       this.router.navigateByUrl('/login');
+    } else {
+      this.accountService.getUserByToken().pipe(take(1))
+        .subscribe({
+          next: user => {
+            this.accountService.setUser(user);
+          }
+        });
     }
-
   }
+
 }
