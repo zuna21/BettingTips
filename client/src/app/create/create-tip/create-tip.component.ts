@@ -101,15 +101,15 @@ export class CreateTipComponent implements OnInit {
       });
   }
 
-  onMakeTipsInactive() {
+  deleteAllTips() {
     const currentTips = this.getTips();
     if (currentTips.length === 0) return;
-    this.tipService.makeTipsInactive().pipe(take(1))
+    this.tipService.deleteAllTips().pipe(take(1))
       .subscribe({
         next: _ => {
-          this.setTips([]);
+          this.tips.next([]);
         }
-      });
+      })
   }
 
 
@@ -124,6 +124,17 @@ export class CreateTipComponent implements OnInit {
     this.tipService.createPhoto(formData)
       .pipe(take(1))
       .subscribe({next: response => this.tipToCreate.photo = response});
+ }
+
+ onDeleteTip(tipToDelete: Tip) {
+  this.tipService.deleteTip(tipToDelete).pipe(take(1))
+    .subscribe({
+      next: _ => {
+        const currentTips = this.getTips();
+        const updatedTips = currentTips.filter(x => x.id !== tipToDelete.id);
+        this.tips.next(updatedTips);
+      }
+    });
  }
 
 }

@@ -52,7 +52,9 @@ namespace API.Data
 
         public async Task<Tip> GetTipById(int id)
         {
-            return await _context.Tips.FindAsync(id);
+            return await _context.Tips
+                .Include(x => x.Photo)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<bool> SaveAllAsync()

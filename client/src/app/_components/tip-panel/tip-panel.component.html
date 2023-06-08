@@ -13,5 +13,8 @@
       <div>
         <img class="tip-photo" src="https://localhost:5001/{{tip.photo.name}}" alt="{{tip.photo.name}}">
       </div>
+      <div *ngIf="canEdit">
+        <button (click)="onDeleteTip()">Delete</button>
+      </div>
     </div>
   </mat-expansion-panel>

@@ -1,10 +1,12 @@
 <div class="main-container">
     <div class="title">Create tip</div>    
-    <button [disabled]="(tips$ | async).length === 0" (click)="onMakeTipsInactive()">Make all tips inactive</button>
+    <button [disabled]="(tips$ | async).length === 0" (click)="deleteAllTips()">Delete All tips</button>
     <div class="tip-container">
         <ng-container *ngFor="let tip of (tips$ | async)">
             <app-tip-panel
                 [tip]="tip"
+                [canEdit]="true"
+                (deleteTip)="onDeleteTip($event)"
             >
             </app-tip-panel>
         </ng-container>

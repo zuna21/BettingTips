@@ -59,6 +59,10 @@ namespace API.Controllers
         {
             var tip = await _tipRepository.GetTipById(id);
             if (tip == null) return NotFound();
+            var photo = await _photoRepository.GetPhotoById(tip.Photo.Id);
+            if (photo == null) return NotFound();
+            if (!DeletePhotoFromServerFolder(photo.Name)) return BadRequest("Failed to delete photo from server.");
+            _photoRepository.DeletePhoto(photo);
             _tipRepository.DeleteTip(tip);
             if (await _tipRepository.SaveAllAsync()) return NoContent();
             return BadRequest("Failed to delete tip.");

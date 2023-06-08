@@ -26,11 +26,19 @@ export class TipService {
     return this.http.post<Tip>(`${this.baseUrl}/tip`, tipCreate);
   }
 
+  public deleteAllTips() {
+    return this.http.delete(`${this.baseUrl}/tip/deleteAllTips`);
+  }
+
   public makeTipsInactive() {
     return this.http.get(`${this.baseUrl}/tip/makeTipsInactive`);
   }
 
   public createPhoto(formData: FormData) {
     return this.http.post<Photo>(`${this.baseUrl}/file`, formData);
+  }
+
+  public deleteTip(tip: Tip) {
+    return this.http.delete(`${this.baseUrl}/tip/${tip.id}`);
   }
 }
