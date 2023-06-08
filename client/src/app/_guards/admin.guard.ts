@@ -1,9 +1,15 @@
 import { CanActivateFn } from "@angular/router";
+import jwt_decode from 'jwt-decode';
+
 
 export function adminGuard(): CanActivateFn {
     return () => {
-        const isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
-        if (!isAdmin) return false;
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+
+        const decodedToken = jwt_decode<any>(userToken);
+        console.log(decodedToken);
+
+        if (decodedToken.isAdmin === "False") return false;
         return true;
     }
 }

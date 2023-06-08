@@ -47,7 +47,7 @@ namespace API.Controllers
             if (await _userRepository.SaveAllAsync())
             {
                 var userToReturn = _mapper.Map<UserDto>(user);
-                userToReturn.Token = _tokenService.CreateToken(user);
+                userToReturn.Token = _tokenService.CreateToken(user, false, false);
                 return userToReturn;
             }
             return BadRequest("Failed to create new user.");
@@ -85,7 +85,7 @@ namespace API.Controllers
 
             if (!isPasswordCorrect) return Unauthorized();
             var userToReturn = _mapper.Map<UserDto>(user);
-            userToReturn.Token = _tokenService.CreateToken(user);
+            userToReturn.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);
             return userToReturn;
         }
 

@@ -15,11 +15,13 @@ namespace API.Services
             Console.WriteLine(config["TokenKey"]);
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-        public string CreateToken(AppUser user)
+        public string CreateToken(AppUser user, bool isAdmin, bool hasSubscription)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
+                new Claim(JwtRegisteredClaimNames.NameId, user.UserName),
+                new Claim("isAdmin", isAdmin.ToString()),
+                new Claim("hasSubscription", hasSubscription.ToString())
             };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);

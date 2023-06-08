@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
         next: user => {
           this.accountService.setUser(user);
           localStorage.setItem('userToken', JSON.stringify(user.token));
-          if (user.isAdmin) localStorage.setItem('isAdmin', JSON.stringify(user.isAdmin));
           this.router.navigateByUrl('/waiting');
         }
       });

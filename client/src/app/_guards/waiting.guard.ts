@@ -1,15 +1,15 @@
 import { CanDeactivateFn } from "@angular/router";
-import { AccountService } from "../_services/account.service";
-import { inject } from "@angular/core";
 import { WaitingComponent } from "../waiting/waiting.component";
+import jwt_decode from 'jwt-decode';
 
 export function waitingGuard(): CanDeactivateFn<WaitingComponent> {
     return () => {
-        const accountService: AccountService = inject(AccountService);
-        const user = accountService.getUser();
-        if (!user) return true;
-        if (user.isAdmin) return true;
-        if (user.hasSubscription) return true;
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+        if (!userToken) return true;
+        const tokenDecode = jwt_decode<any>(userToken);
+        if (tokenDecode.hasSubscription === "True") return true;
+        if (tokenDecode.isAdmin === "True") return true; 
+
         return false;
     }
 }
