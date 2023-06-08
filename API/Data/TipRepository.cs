@@ -1,4 +1,3 @@
-using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +41,11 @@ namespace API.Data
                 .Include(x => x.Packages)
                 .Include(x => x.Photo)
                 .ToListAsync();
+        }
+
+        public async Task<ICollection<Tip>> GetAllTips()
+        {
+            return await _context.Tips.ToListAsync();
         }
 
         public async Task<Tip> GetTipById(int id)

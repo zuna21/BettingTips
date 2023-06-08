@@ -9,6 +9,7 @@ namespace API.Interfaces
         Task<Tip> GetTipById(int id);
         Task<ICollection<Tip>> GetActiveTipsByPackageId(int id);
         Task<ICollection<Tip>> GetAllActiveTips();
+        Task<ICollection<Tip>> GetAllTips();
         Task<bool> SaveAllAsync();        
     }
 }

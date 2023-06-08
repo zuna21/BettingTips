@@ -7,7 +7,6 @@ export function adminGuard(): CanActivateFn {
         const userToken = JSON.parse(localStorage.getItem('userToken'));
 
         const decodedToken = jwt_decode<any>(userToken);
-        console.log(decodedToken);
 
         if (decodedToken.isAdmin === "False") return false;
         return true;

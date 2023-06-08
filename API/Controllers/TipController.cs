@@ -36,6 +36,22 @@ namespace API.Controllers
             return Ok(_mapper.Map<ICollection<TipDto>>(tips));
         }
 
+        [HttpDelete("deleteAllTips")]
+        public async Task<ActionResult> DeleteAllTips()
+        {
+            var tips = await _tipRepository.GetAllTips();
+            if (tips == null) return NotFound();
+            foreach (var tip in tips)
+            {
+                var photo = await _photoRepository.GetPhotoById(tip.Photo.Id);
+                if (photo == null) return NotFound();   // Ovaj uslov se ne bi smio nikad ispuniti
+                _photoRepository.DeletePhoto(photo);
+                _tipRepository.DeleteTip(tip);
+            }
+
+            if (await _tipRepository.SaveAllAsync()) return NoContent();
+            return BadRequest("Failed to delete tips.");
+        }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTip(int id)

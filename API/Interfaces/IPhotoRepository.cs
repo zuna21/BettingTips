@@ -6,6 +6,7 @@ namespace API.Interfaces
     {
         void AddNewPhoto(Photo photo);
         Task<Photo> GetPhotoById(int id);
+        void DeletePhoto(Photo photo);
         Task<bool> SaveAllAsync();
     }
 }

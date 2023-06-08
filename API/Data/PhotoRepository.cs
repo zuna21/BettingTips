@@ -17,6 +17,11 @@ namespace API.Data
             _context.Photos.Add(photo);
         }
 
+        public void DeletePhoto(Photo photo)
+        {
+            _context.Photos.Remove(photo);
+        }
+
         public async Task<Photo> GetPhotoById(int id)
         {
             return await _context.Photos.FindAsync(id);
