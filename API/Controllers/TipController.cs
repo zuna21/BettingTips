@@ -45,6 +45,7 @@ namespace API.Controllers
             {
                 var photo = await _photoRepository.GetPhotoById(tip.Photo.Id);
                 if (photo == null) return NotFound();   // Ovaj uslov se ne bi smio nikad ispuniti
+                if (!DeletePhotoFromServerFolder(photo.Name)) return BadRequest("Failed to delete photo from server folder.");
                 _photoRepository.DeletePhoto(photo);
                 _tipRepository.DeleteTip(tip);
             }
@@ -98,6 +99,19 @@ namespace API.Controllers
             _tipRepository.AddTip(tip);
             if (await _tipRepository.SaveAllAsync()) return _mapper.Map<TipDto>(tip);
             return BadRequest("Failed to create tip.");
+        }
+
+        private bool DeletePhotoFromServerFolder(string photoName)
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photoName);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+                return true;
+            }
+
+            return false;
         }
     }
 }

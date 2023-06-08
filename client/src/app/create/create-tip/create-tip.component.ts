@@ -38,6 +38,7 @@ export class CreateTipComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTips();
+    this.loadPackages();
     this.initializeForm();
   }
 
@@ -61,6 +62,13 @@ export class CreateTipComponent implements OnInit {
     this.tipService.getAllActiveTips().pipe(take(1))
       .subscribe({
         next: fetchedTips => this.setTips(fetchedTips)
+      });
+  }
+
+  loadPackages() {
+    this.packageService.getAllPackages().pipe(take(1))
+      .subscribe({
+        next: allPackages => this.packageService.setAllPackages(allPackages)
       });
   }
 

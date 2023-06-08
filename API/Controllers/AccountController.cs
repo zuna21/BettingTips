@@ -95,7 +95,9 @@ namespace API.Controllers
             var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var user = await _userRepository.GetUserByUsername(username);
             if (user == null) return NotFound();
-            return _mapper.Map<UserDto>(user);
+            var userToReturn = _mapper.Map<UserDto>(user);
+            userToReturn.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);
+            return userToReturn;
         }
 
         

@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
         .subscribe({
           next: user => {
             this.accountService.setUser(user);
+            localStorage.setItem('userToken', JSON.stringify(user.token)); // iako do ovoga nikad nece doci jer ako nema ide na login
           }
         });
     }

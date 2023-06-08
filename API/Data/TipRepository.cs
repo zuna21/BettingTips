@@ -45,7 +45,9 @@ namespace API.Data
 
         public async Task<ICollection<Tip>> GetAllTips()
         {
-            return await _context.Tips.ToListAsync();
+            return await _context.Tips
+                .Include(x => x.Photo)
+                .ToListAsync();
         }
 
         public async Task<Tip> GetTipById(int id)
