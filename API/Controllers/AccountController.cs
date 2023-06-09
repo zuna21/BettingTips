@@ -114,7 +114,12 @@ namespace API.Controllers
             user.HasSubscription = false;
             user.EndDate = null;
             user.StartDate = null;
-            if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
+            if (await _userRepository.SaveAllAsync())
+            {
+                var userToReturn = _mapper.Map<UserDto>(user);
+                userToReturn.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);
+                return userToReturn;
+            }
             return BadRequest("Failed to select new package.");
         }
 
