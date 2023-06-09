@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using API.DTOs;
 using API.Interfaces;
 using AutoMapper;
@@ -38,6 +39,30 @@ namespace API.Controllers
             user.EndDate = DateTime.UtcNow.AddDays(user.Package.ActiveDays);
             if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
             return BadRequest("Failed to approve user.");
+        }
+
+        [HttpGet("checkUserSubscription")]
+        public async Task<ActionResult<UserDto>> CheckUserSubscription() 
+        {
+            string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepository.GetUserByUsername(username);
+            if (user == null) return NotFound();
+            if (user.HasSubscription)
+            {
+                var currentDate = DateTime.UtcNow;
+                if (user.EndDate <= currentDate)
+                {
+                    user.HasSubscription = false;
+                    user.StartDate = null;
+                    user.EndDate = null;
+                    if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
+                    return BadRequest("Failed to change user subscription.");
+                }
+
+                return _mapper.Map<UserDto>(user);
+            }
+
+            return _mapper.Map<UserDto>(user);
         }
     }
 }

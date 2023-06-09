@@ -16,33 +16,38 @@ import { WaitingComponent } from './waiting/waiting.component';
 import { waitingGuard } from './_guards/waiting.guard';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: '/home'},
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
   {
-    path: '', 
+    path: '',
     canActivate: [authGuard()],
     children: [
-      {path: 'home', component: HomeComponent},
-      {path: 'tips/:id', component: TipsComponent},
-      {path: 'contact', component: ContactComponent},
-      {path: 'package-list', component: PackageListComponent},
-      {path: 'waiting', component: WaitingComponent, canDeactivate: [waitingGuard()]}
-  ]},
+      { path: 'home', component: HomeComponent },
+      { path: 'tips/:id', component: TipsComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'package-list', component: PackageListComponent },
+    ],
+  },
+  {
+    path: 'waiting',
+    component: WaitingComponent,
+    canDeactivate: [waitingGuard()],
+  },
   {
     path: 'admin',
     canActivate: [adminGuard()],
     children: [
-      {path: '', component: UsersComponent},
-      {path: 'create', component: CreateComponent},
-      {path: 'create-package', component: CreatePackageComponent},
-      {path: 'create-tip', component: CreateTipComponent},
-    ]
+      { path: '', component: UsersComponent },
+      { path: 'create', component: CreateComponent },
+      { path: 'create-package', component: CreatePackageComponent },
+      { path: 'create-tip', component: CreateTipComponent },
+    ],
   },
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
