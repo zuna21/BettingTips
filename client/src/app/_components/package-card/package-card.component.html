@@ -1,15 +1,18 @@
 <div class="main-container" *ngIf="package">
+  <div>
     <div>{{ package.name }}</div>
-    <hr>
-    <div>{{ package.description }}</div>
-    <hr>
-    <div>
-        <div>${{ package.price }}</div>
-        <button (click)="onSelect()" type="button">{{"Select" | uppercase}}</button>
-        <button 
-            *ngIf="canDelete" 
-            type="button"
-            (click)="onDelete()"
-        >{{"Delete" | uppercase}}</button>
-    </div>
+    <div class="active-days">{{ package.activeDays }} days</div>
+  </div>
+  <hr />
+  <div>{{ package.description }}</div>
+  <hr />
+  <div>
+    <div>${{ package.price }}</div>
+    <button (click)="onSelect()" type="button">
+      {{ "Select" | uppercase }}
+    </button>
+    <button *ngIf="canDelete" type="button" (click)="onDelete()">
+      {{ "Delete" | uppercase }}
+    </button>
+  </div>
 </div>

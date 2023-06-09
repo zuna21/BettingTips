@@ -27,6 +27,7 @@ export class CreatePackageComponent implements OnInit {
     this.packageForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators. required],
+      activeDays: [0, Validators.required],
       price: ['', Validators.required]
     });
   }

@@ -1,24 +1,31 @@
 .main-container {
-    padding: 1rem;
-    border: 3px solid tomato;
-    display: flex;
-    gap: 1rem;
-    flex-direction: column;
-    background: aliceblue;
+  padding: 1rem;
+  border: 3px solid tomato;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  background: aliceblue;
 }
 
 .main-container > div:first-child {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
 }
 
 .main-container > div:last-child {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .main-container > div:last-child > div {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.active-days {
+  font-weight: 400;
+  color: coral;
 }

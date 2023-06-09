@@ -20,6 +20,7 @@
                     <ng-container  *ngFor="let package of packages">
                         <div class="package-wrapper">
                             {{ package.name }}
+                            {{ package.activeDays }} days
                             <input type="checkbox" (click)="onSelectPackage($event, package)" />
                         </div>
                     </ng-container>
