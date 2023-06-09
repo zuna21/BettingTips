@@ -9,11 +9,10 @@ import { CreateComponent } from './create/create.component';
 import { CreatePackageComponent } from './create/create-package/create-package.component';
 import { CreateTipComponent } from './create/create-tip/create-tip.component';
 import { PackageListComponent } from './package-list/package-list.component';
-import { authGuard } from './_guards/auth.guard';
 import { UsersComponent } from './users/users.component';
-import { adminGuard } from './_guards/admin.guard';
 import { WaitingComponent } from './waiting/waiting.component';
-import { waitingGuard } from './_guards/waiting.guard';
+import { authGuard } from './_guards/auth.guard';
+import { adminGuard } from './_guards/admin.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -25,21 +24,17 @@ const routes: Routes = [
       { path: 'tips/:id', component: TipsComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'package-list', component: PackageListComponent },
-    ],
-  },
-  {
-    path: 'waiting',
-    component: WaitingComponent,
-    canDeactivate: [waitingGuard()],
-  },
-  {
-    path: 'admin',
-    canActivate: [adminGuard()],
-    children: [
-      { path: '', component: UsersComponent },
-      { path: 'create', component: CreateComponent },
-      { path: 'create-package', component: CreatePackageComponent },
-      { path: 'create-tip', component: CreateTipComponent },
+      {path: 'waiting', component: WaitingComponent},
+      {
+        path: 'admin',
+        canActivate: [adminGuard()],
+        children: [
+          { path: '', component: UsersComponent },
+          { path: 'create', component: CreateComponent },
+          { path: 'create-package', component: CreatePackageComponent },
+          { path: 'create-tip', component: CreateTipComponent },
+        ],
+      }
     ],
   },
   { path: 'login', component: LoginComponent },

@@ -43,6 +43,8 @@ namespace API.Controllers
             user.PasswordHash1 = hmac.ComputeHash(Encoding.UTF8.GetBytes(userCreateDto.Password));
             user.PasswordHash2 = hmac.ComputeHash(Encoding.UTF8.GetBytes("12345678"));
             user.PasswordSalt = hmac.Key;
+            user.StartDate = null;
+            user.EndDate = null;
             _userRepository.AddNewUser(user);
             if (await _userRepository.SaveAllAsync())
             {
@@ -98,6 +100,22 @@ namespace API.Controllers
             var userToReturn = _mapper.Map<UserDto>(user);
             userToReturn.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);
             return userToReturn;
+        }
+
+        [HttpPut("selectNewPackage")]
+        public async Task<ActionResult<UserDto>> SelectNewPackage(PackageDto packageDto)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepository.GetUserByUsername(username);
+            if (user == null) return NotFound();
+            var package = await _packageRepository.FindPackageById(packageDto.Id);
+            if (package == null) return NotFound();
+            user.Package = package;
+            user.HasSubscription = false;
+            user.EndDate = null;
+            user.StartDate = null;
+            if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
+            return BadRequest("Failed to select new package.");
         }
 
         

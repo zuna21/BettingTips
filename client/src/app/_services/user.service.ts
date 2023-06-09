@@ -17,4 +17,8 @@ export class UserService {
   public approveUser(user: User) {
     return this.http.put<User>(`${this.baseUrl}/user/approveUser`, user);
   }
+
+  public checkUserSubscription() {
+    return this.http.get<User>(`${this.baseUrl}/user/checkUserSubscription`);
+  }
 }

@@ -12,13 +12,16 @@ namespace API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
+        private readonly ITokenService _tokenService;
         public UserController(
             IMapper mapper,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            ITokenService tokenService
         )
         {
             _mapper = mapper;
             _userRepository = userRepository;
+            _tokenService = tokenService;
         }
 
         [HttpGet("GetAllUnsubscriptionUsers")]
@@ -36,7 +39,7 @@ namespace API.Controllers
             if (user == null) return NotFound();
             user.HasSubscription = true;
             user.StartDate = DateTime.UtcNow;
-            user.EndDate = DateTime.UtcNow.AddDays(user.Package.ActiveDays);
+            user.EndDate = DateTime.UtcNow.AddSeconds(user.Package.ActiveDays);
             if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
             return BadRequest("Failed to approve user.");
         }
@@ -55,14 +58,21 @@ namespace API.Controllers
                     user.HasSubscription = false;
                     user.StartDate = null;
                     user.EndDate = null;
-                    if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
+                    if (await _userRepository.SaveAllAsync())
+                    {
+                        var userToReturn = _mapper.Map<UserDto>(user);
+                        userToReturn.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);
+                        return userToReturn;
+                    }
                     return BadRequest("Failed to change user subscription.");
                 }
-
-                return _mapper.Map<UserDto>(user);
+                var userToReturn2 = _mapper.Map<UserDto>(user);
+                userToReturn2.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);
+                return userToReturn2;
             }
-
-            return _mapper.Map<UserDto>(user);
+            var userToReturn3 = _mapper.Map<UserDto>(user);
+            userToReturn3.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);    
+            return userToReturn3;
         }
     }
 }

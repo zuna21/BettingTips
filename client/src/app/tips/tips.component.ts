@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subscription, mergeMap } from 'rxjs';
 import { Package } from '../_interfaces/package';
 import { PackageService } from '../_services/package.service';
 import { TipService } from '../_services/tip.service';
 import { Tip } from '../_interfaces/tip';
+import { UserService } from '../_services/user.service';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-tips',
@@ -19,16 +21,38 @@ export class TipsComponent implements OnInit, OnDestroy {
   tips$ = this.tips.asObservable();
   packageSubscription: Subscription;
   tipsSubscription: Subscription;
+  userServiceSubscription: Subscription;
+  gettingData: boolean = false;
   
   constructor(
     private activatedRoute: ActivatedRoute,
     private packageService: PackageService,
-    private tipService: TipService
+    private tipService: TipService,
+    private userService: UserService,
+    private accountService: AccountService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getPackage();
-    this.getPackageTips();
+    this.checkUserSubscription();
+  }
+
+  checkUserSubscription() {
+    this.userServiceSubscription = this.userService.checkUserSubscription()
+      .subscribe({
+        next: user => {
+          localStorage.removeItem('userToken');
+          localStorage.setItem('userToken', JSON.stringify(user.token));
+          this.accountService.setUser(user);
+          if (user.hasSubscription || user.isAdmin) {
+            this.gettingData = true;
+            this.getPackage();
+            this.getPackageTips();
+          } else {
+            this.router.navigateByUrl('/waiting');
+          }
+        }
+      });
   }
 
   getPackage() {
@@ -48,7 +72,10 @@ export class TipsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.packageSubscription.unsubscribe();
-    this.tipsSubscription.unsubscribe();
+    if (this.gettingData) {
+      this.packageSubscription.unsubscribe();
+      this.tipsSubscription.unsubscribe();
+    }
+    this.userServiceSubscription.unsubscribe();
   }
 }
