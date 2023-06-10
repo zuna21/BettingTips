@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { AccountService } from './_services/account.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
@@ -7,7 +7,8 @@ import { LoadingService } from './_services/loading.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   private accountService: AccountService = inject(AccountService);

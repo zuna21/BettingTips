@@ -10,12 +10,13 @@ export class PackageCardComponent {
   @Input() package: Package | undefined;
   @Input() canDelete: boolean = false;
   @Output() deletedPackage = new EventEmitter();
+  @Output() selectedPackage = new EventEmitter();
 
   onDelete() {
     this.deletedPackage.emit(this.package);
   }
 
   onSelect() {
-    console.log(this.package);
+    this.selectedPackage.emit(this.package);
   }
 }

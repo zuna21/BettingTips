@@ -4,6 +4,7 @@ import { UserLogin } from '../_interfaces/userLogin';
 import { User } from '../_interfaces/user';
 import { BehaviorSubject } from 'rxjs';
 import { UserCreate } from '../_interfaces/userCreate';
+import { Package } from '../_interfaces/package';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class AccountService {
 
   register(userCreate: UserCreate) {
     return this.http.post<User>(`${this.baseUrl}/account/register`, userCreate);
+  }
+
+  selectNewPackage(newPackage: Package) {
+    return this.http.put<User>(`${this.baseUrl}/account/selectNewPackage`, newPackage);
   }
 
   getUserByToken() {
