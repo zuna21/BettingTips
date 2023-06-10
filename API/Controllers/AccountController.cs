@@ -33,7 +33,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> RegisterUser(UserCreateDto userCreateDto)
         {
             var user = _mapper.Map<AppUser>(userCreateDto);
-            if (await _userRepository.IsUsernameTaken(user))   
+            if (await _userRepository.IsUsernameTaken(user.UserName))   
                 return BadRequest("Username is already taken.");
             var package = await _packageRepository.FindPackageById(userCreateDto.Package.Id);
             if (package == null) return NotFound();

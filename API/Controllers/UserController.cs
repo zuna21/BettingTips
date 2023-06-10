@@ -1,4 +1,6 @@
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using API.DTOs;
 using API.Interfaces;
 using AutoMapper;
@@ -75,9 +77,35 @@ namespace API.Controllers
             return BadRequest("Failed to approve user.");
         }
 
+        [HttpPut("editUser/{id}")]
+        public async Task<ActionResult<UserDto>> EditUser(int id, UserEditDto userEditDto)
+        {
+            string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userThatEdit = await _userRepository.GetUserByUsername(username);
+            if (userThatEdit == null) return NotFound();
+            if (!userThatEdit.IsAdmin)
+            {
+                if (userThatEdit.Id != id) return Unauthorized();
+            } 
+            var editableUser = await _userRepository.GetUserById(id); // ovdje ne dobijes package jer koristis FindAsync umjesto FirstOrDefaultAsync
+            if (editableUser == null) return NotFound();
+            
+            using var hmac = new HMACSHA512(editableUser.PasswordSalt);
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userEditDto.Password));
+            editableUser.PasswordHash1 = computedHash;
+            var userToReturn = _mapper.Map<UserDto>(editableUser);
+            userToReturn.Token = _tokenService.CreateToken(editableUser, editableUser.IsAdmin, editableUser.HasSubscription);
+            if (await _userRepository.SaveAllAsync()) return userToReturn;
+            return BadRequest("Failed to edit profile.");
+        }
+
         [HttpDelete("deleteUser/{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
+            string username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userAdmin = await _userRepository.GetUserByUsername(username);
+            if (userAdmin == null) return NotFound();
+            if (!userAdmin.IsAdmin) return Unauthorized();
             var user = await _userRepository.GetUserById(id);
             if (user == null) return NotFound();
             _userRepository.DeleteUser(user);

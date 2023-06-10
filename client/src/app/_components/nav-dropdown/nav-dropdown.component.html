@@ -3,6 +3,7 @@
 </div>
 <div class="list-wrapper" *ngIf="isDropdownOpen && (accountService.user$ | async)">
     <div class="item" routerLink="/home">Home</div>
+    <div class="item" (click)="onEditProfile()">Edit Profile</div>
     <div class="item" routerLink="/package-list">Packages</div>
     <div class="item" (click)="onOpenTips()">
         <div class="iq200">

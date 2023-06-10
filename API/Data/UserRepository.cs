@@ -42,9 +42,9 @@ namespace API.Data
                 .FirstOrDefaultAsync(x => x.UserName == username.ToLower());
         }
 
-        public async Task<bool> IsUsernameTaken(AppUser user)
+        public async Task<bool> IsUsernameTaken(string username)
         {
-            var selectedUser = await _context.Users.FirstOrDefaultAsync(x => x.UserName == user.UserName.ToLower());
+            var selectedUser = await _context.Users.FirstOrDefaultAsync(x => x.UserName == username.ToLower());
             if (selectedUser == null) return false;
             return true;
         }

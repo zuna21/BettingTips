@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { User } from '../_interfaces/user';
+import { UserEdit } from '../_interfaces/userEdit';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class UserService {
 
   public deleteUser(userId: number) {
     return this.http.delete(`${this.baseUrl}/user/deleteUser/${userId}`);
+  }
+
+  public editUser(user: User, newValueUser: UserEdit){
+    return this.http.put<User>(`${this.baseUrl}/user/editUser/${user.id}`, newValueUser);
   }
 }

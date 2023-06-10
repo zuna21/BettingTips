@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { UsersComponent } from './users/users.component';
 import { UserCardComponent } from './_components/user-card/user-card.component';
 import { WaitingComponent } from './waiting/waiting.component';
 import { AuthInterceptor } from './_interceptors/auth.interceptor';
+import { EditUserDialogComponent } from './_components/edit-user-dialog/edit-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { AuthInterceptor } from './_interceptors/auth.interceptor';
     UsersComponent,
     UserCardComponent,
     WaitingComponent,
+    EditUserDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { AuthInterceptor } from './_interceptors/auth.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     MatExpansionModule,
+    MatDialogModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

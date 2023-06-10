@@ -1,0 +1,24 @@
+<div class="main-container" *ngIf="user">
+    <div class="username">{{ user.username }}</div>
+    <div>
+        <form class="form-container" [formGroup]="editUserForm" (ngSubmit)="save()">
+            <div>
+                <label>Username: </label>
+                <input type="text" formControlName="username" />
+            </div>
+            <div>
+                <label>Email: </label>
+                <input type="email" formControlName="email" />
+            </div>
+            <div>
+                <label>Password: </label>
+                <input type="password" formControlName="password" />
+            </div>
+
+            <div class="btn-container">
+                <button type="submit" [disabled]="editUserForm.invalid">Save</button>
+                <button type="button" (click)="close()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

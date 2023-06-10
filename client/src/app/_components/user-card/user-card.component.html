@@ -9,6 +9,7 @@
     </div>
     <div class="buttons-wrapper">
         <button *ngIf="!user.hasSubscription" (click)="onApproveUser()">Approve</button>
+        <button (click)="onEditUser()">Edit User</button>
         <button (click)="onDeleteUser()">Delete</button>
     </div>
 </div>

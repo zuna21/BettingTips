@@ -3,6 +3,9 @@ import { UserService } from '../_services/user.service';
 import { BehaviorSubject, map, take } from 'rxjs';
 import { User } from '../_interfaces/user';
 import { AccountService } from '../_services/account.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EditUserDialogComponent } from '../_components/edit-user-dialog/edit-user-dialog.component';
+import { UserEdit } from '../_interfaces/userEdit';
 
 @Component({
   selector: 'app-users',
@@ -12,6 +15,7 @@ import { AccountService } from '../_services/account.service';
 export class UsersComponent implements OnInit {
   private userService: UserService = inject(UserService);
   private accountService: AccountService = inject(AccountService);
+  private dialog: MatDialog = inject(MatDialog);
  
   private allUsers = new BehaviorSubject<User[]>([]);
   private selectedUsers = new BehaviorSubject<User[]>([]);
@@ -80,5 +84,39 @@ export class UsersComponent implements OnInit {
           this.selectedUsers.next(selectedUsersCurrentValueUpdated);
         }
       })
+  }
+
+  editUser(user: User) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      user: user
+    };
+
+    const dialogRef = this.dialog.open(EditUserDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe({
+      next: newPassword => {
+        if (!newPassword) return;
+
+        const newUserValeu: UserEdit = {
+          username: user.username,
+          email: user.email,
+          password: newPassword.password
+        };
+        this.userService.editUser(user, newUserValeu).pipe(take(1))
+          .subscribe({
+            next: (user: User) => {
+              const allUsersCurrentValue = this.allUsers.getValue();
+              let allUsersCurrentValueUpdated = allUsersCurrentValue.filter(x => x.id !== user.id);
+              allUsersCurrentValueUpdated = [...allUsersCurrentValueUpdated, user];
+              this.allUsers.next(allUsersCurrentValueUpdated);
+
+            }
+          });
+      }
+    });
   }
 }
