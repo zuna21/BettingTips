@@ -1,4 +1,4 @@
-<div *ngIf="user" class="main-container">
+<div *ngIf="user" class="main-container" [ngClass]="{'has-subscription': user.hasSubscription}">
     <div>
         <div>{{ user.username }}</div>
         <div class="email">{{ user.email }}</div>
@@ -7,7 +7,8 @@
         <div>{{ user.package.name }}</div>
         <div>${{ user.package.price }}</div>
     </div>
-    <div>
-        <button (click)="onApproveUser()">Approve</button>
+    <div class="buttons-wrapper">
+        <button *ngIf="!user.hasSubscription" (click)="onApproveUser()">Approve</button>
+        <button (click)="onDeleteUser()">Delete</button>
     </div>
 </div>

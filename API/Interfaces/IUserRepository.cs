@@ -6,8 +6,10 @@ namespace API.Interfaces
     {
         Task<bool> IsUsernameTaken(AppUser user);
         void AddNewUser(AppUser user);
+        void DeleteUser(AppUser user);
         Task<AppUser> GetUserByUsername(string username);
-        Task<ICollection<AppUser>> GetAllUnsubscriptionUsers();
+        Task<AppUser> GetUserById(int id);
+        Task<ICollection<AppUser>> GetAllUsers();
         Task<bool> SaveAllAsync();
     }
 }

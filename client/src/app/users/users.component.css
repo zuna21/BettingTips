@@ -1,6 +1,10 @@
+button {
+    padding: 0.2rem;
+}
+
 .main-container {
     background: cadetblue;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,4 +22,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
 }

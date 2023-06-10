@@ -18,12 +18,21 @@ namespace API.Data
             _context.Users.Add(user);
         }
 
-        public async Task<ICollection<AppUser>> GetAllUnsubscriptionUsers()
+        public void DeleteUser(AppUser user)
+        {
+            _context.Users.Remove(user);
+        }
+
+        public async Task<ICollection<AppUser>> GetAllUsers()
         {
             return await _context.Users
-                .Where(x => x.HasSubscription == false && x.IsAdmin == false)
                 .Include(x => x.Package)
                 .ToListAsync();
+        }
+
+        public async Task<AppUser> GetUserById(int id)
+        {
+            return await _context.Users.FindAsync(id);
         }
 
         public async Task<AppUser> GetUserByUsername(string username)

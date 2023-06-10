@@ -24,24 +24,12 @@ namespace API.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpGet("GetAllUnsubscriptionUsers")]
-        public async Task<ActionResult<ICollection<UserDto>>> GetAllUnsubscriptionUsers()
+        [HttpGet("getAllUsers")]
+        public async Task<ActionResult<ICollection<UserDto>>> GetAllUsers() 
         {
-            var users = await _userRepository.GetAllUnsubscriptionUsers();
+            var users = await _userRepository.GetAllUsers();
             if (users == null) return NotFound();
-            return Ok(_mapper.Map<ICollection<UserDto>>(users));   
-        }
-
-        [HttpPut("approveUser")]
-        public async Task<ActionResult<UserDto>> ApproveUser(UserDto userDto)
-        {
-            var user = await _userRepository.GetUserByUsername(userDto.Username);
-            if (user == null) return NotFound();
-            user.HasSubscription = true;
-            user.StartDate = DateTime.UtcNow;
-            user.EndDate = DateTime.UtcNow.AddSeconds(user.Package.ActiveDays);
-            if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
-            return BadRequest("Failed to approve user.");
+            return Ok(_mapper.Map<ICollection<UserDto>>(users));
         }
 
         [HttpGet("checkUserSubscription")]
@@ -74,5 +62,28 @@ namespace API.Controllers
             userToReturn3.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);    
             return userToReturn3;
         }
+
+        [HttpPut("approveUser")]
+        public async Task<ActionResult<UserDto>> ApproveUser(UserDto userDto)
+        {
+            var user = await _userRepository.GetUserByUsername(userDto.Username);
+            if (user == null) return NotFound();
+            user.HasSubscription = true;
+            user.StartDate = DateTime.UtcNow;
+            user.EndDate = DateTime.UtcNow.AddSeconds(user.Package.ActiveDays);
+            if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
+            return BadRequest("Failed to approve user.");
+        }
+
+        [HttpDelete("deleteUser/{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+            var user = await _userRepository.GetUserById(id);
+            if (user == null) return NotFound();
+            _userRepository.DeleteUser(user);
+            if (await _userRepository.SaveAllAsync()) return NoContent();
+            return BadRequest("Failed to delete user.");
+        }
+
     }
 }

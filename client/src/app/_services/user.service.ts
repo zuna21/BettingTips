@@ -10,8 +10,8 @@ export class UserService {
 
   private baseUrl: string = 'https://localhost:5001/api';
 
-  public getAllUnsubscriptionUsers() {
-    return this.http.get<User[]>(`${this.baseUrl}/user/getAllUnsubscriptionUsers`);
+  public getAllUsers() {
+    return this.http.get<User[]>(`${this.baseUrl}/user/getAllUsers`);
   }
 
   public approveUser(user: User) {
@@ -20,5 +20,9 @@ export class UserService {
 
   public checkUserSubscription() {
     return this.http.get<User>(`${this.baseUrl}/user/checkUserSubscription`);
+  }
+
+  public deleteUser(userId: number) {
+    return this.http.delete(`${this.baseUrl}/user/deleteUser/${userId}`);
   }
 }
