@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AccountService } from './_services/account.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { LoadingService } from './_services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { take } from 'rxjs';
 export class AppComponent implements OnInit {
   private accountService: AccountService = inject(AccountService);
   private router: Router = inject(Router);
+  loadingService: LoadingService = inject(LoadingService);
 
   ngOnInit(): void {
     this.loginUser();

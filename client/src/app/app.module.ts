@@ -29,6 +29,9 @@ import { UserCardComponent } from './_components/user-card/user-card.component';
 import { WaitingComponent } from './waiting/waiting.component';
 import { AuthInterceptor } from './_interceptors/auth.interceptor';
 import { EditUserDialogComponent } from './_components/edit-user-dialog/edit-user-dialog.component';
+import { LoadingSpinnerComponent } from './_components/loading-spinner/loading-spinner.component';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { ConfirmationsDialogComponent } from './_components/confirmations-dialog/confirmations-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,8 @@ import { EditUserDialogComponent } from './_components/edit-user-dialog/edit-use
     UserCardComponent,
     WaitingComponent,
     EditUserDialogComponent,
+    LoadingSpinnerComponent,
+    ConfirmationsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,8 @@ import { EditUserDialogComponent } from './_components/edit-user-dialog/edit-use
     MatDialogModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -2,3 +2,6 @@
 <div class="main-wrapper">
     <router-outlet></router-outlet>
 </div>
+<div class="loading-spinner-wrapper" *ngIf="loadingService.isLoading$ | async">
+    <app-loading-spinner></app-loading-spinner>
+</div>

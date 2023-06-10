@@ -6,6 +6,7 @@ import { AccountService } from '../_services/account.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../_components/edit-user-dialog/edit-user-dialog.component';
 import { UserEdit } from '../_interfaces/userEdit';
+import { ConfirmationsDialogComponent } from '../_components/confirmations-dialog/confirmations-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -72,18 +73,35 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    this.userService.deleteUser(user.id).pipe(take(1))
-      .subscribe({
-        next: _ => {
-          const allUsersCurrentValue = this.allUsers.getValue();
-          const allUsersCurrentValueUpdated = allUsersCurrentValue.filter(x => x.id !== user.id);
-          this.allUsers.next(allUsersCurrentValueUpdated);
 
-          const selectedUsersCurrentValue = this.selectedUsers.getValue();
-          const selectedUsersCurrentValueUpdated = selectedUsersCurrentValue.filter(x => x.id !== user.id);
-          this.selectedUsers.next(selectedUsersCurrentValueUpdated);
+    const dialogConfig = new MatDialogConfig();
+    const question: string = `Are you sure you want to delete user: ${user.username}?`;
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      question: question
+    };
+
+    const dialogRef = this.dialog.open(ConfirmationsDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().pipe(take(1))
+      .subscribe({
+        next: (response: boolean) => {
+          if (!response) return;
+          this.userService.deleteUser(user.id).pipe(take(1))
+            .subscribe({
+              next: _ => {
+                const allUsersCurrentValue = this.allUsers.getValue();
+                const allUsersCurrentValueUpdated = allUsersCurrentValue.filter(x => x.id !== user.id);
+                this.allUsers.next(allUsersCurrentValueUpdated);
+
+                const selectedUsersCurrentValue = this.selectedUsers.getValue();
+                const selectedUsersCurrentValueUpdated = selectedUsersCurrentValue.filter(x => x.id !== user.id);
+                this.selectedUsers.next(selectedUsersCurrentValueUpdated);
+              }
+            });
         }
-      })
+      });
   }
 
   editUser(user: User) {
