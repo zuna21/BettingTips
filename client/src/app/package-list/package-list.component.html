@@ -4,7 +4,7 @@
         <ng-container *ngFor="let package of (packageService.allPackages$ | async)">
             <app-package-card
                 [package]="package"
-                (selectedPackage)="selectedPackage($event)"
+                (selectedPackage)="selectedPackageDialog($event)"
             ></app-package-card>
         </ng-container>
     </div>

@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../_components/edit-user-dialog/edit-user-dialog.component';
 import { UserEdit } from '../_interfaces/userEdit';
 import { ConfirmationsDialogComponent } from '../_components/confirmations-dialog/confirmations-dialog.component';
+import { createConfirmDialog } from '../_functions/createConfirmDialog.function';
 
 @Component({
   selector: 'app-users',
@@ -72,39 +73,35 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  deleteUser(user: User) {
-
-    const dialogConfig = new MatDialogConfig();
+  deleteUserDialog(user: User) {
     const question: string = `Are you sure you want to delete user: ${user.username}?`;
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      question: question
-    };
 
-    const dialogRef = this.dialog.open(ConfirmationsDialogComponent, dialogConfig);
-
+    const dialogRef = this.dialog.open(ConfirmationsDialogComponent, createConfirmDialog(question));
     dialogRef.afterClosed().pipe(take(1))
       .subscribe({
         next: (response: boolean) => {
           if (!response) return;
-          this.userService.deleteUser(user.id).pipe(take(1))
-            .subscribe({
-              next: _ => {
-                const allUsersCurrentValue = this.allUsers.getValue();
-                const allUsersCurrentValueUpdated = allUsersCurrentValue.filter(x => x.id !== user.id);
-                this.allUsers.next(allUsersCurrentValueUpdated);
-
-                const selectedUsersCurrentValue = this.selectedUsers.getValue();
-                const selectedUsersCurrentValueUpdated = selectedUsersCurrentValue.filter(x => x.id !== user.id);
-                this.selectedUsers.next(selectedUsersCurrentValueUpdated);
-              }
-            });
+          this.deleteUser(user.id);
         }
       });
   }
 
-  editUser(user: User) {
+  deleteUser(userId: number) {
+    this.userService.deleteUser(userId).pipe(take(1))
+      .subscribe({
+        next: _ => {
+          const allUsersCurrentValue = this.allUsers.getValue();
+          const allUsersCurrentValueUpdated = allUsersCurrentValue.filter(x => x.id !== userId);
+          this.allUsers.next(allUsersCurrentValueUpdated);
+
+          const selectedUsersCurrentValue = this.selectedUsers.getValue();
+          const selectedUsersCurrentValueUpdated = selectedUsersCurrentValue.filter(x => x.id !== userId);
+          this.selectedUsers.next(selectedUsersCurrentValueUpdated);
+        }
+      });
+  }
+
+  editUserDialog(user: User) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -124,17 +121,21 @@ export class UsersComponent implements OnInit {
           email: user.email,
           password: newPassword.password
         };
-        this.userService.editUser(user, newUserValeu).pipe(take(1))
-          .subscribe({
-            next: (user: User) => {
-              const allUsersCurrentValue = this.allUsers.getValue();
-              let allUsersCurrentValueUpdated = allUsersCurrentValue.filter(x => x.id !== user.id);
-              allUsersCurrentValueUpdated = [...allUsersCurrentValueUpdated, user];
-              this.allUsers.next(allUsersCurrentValueUpdated);
-
-            }
-          });
+        this.editUser(user, newUserValeu);
       }
     });
+  }
+
+  editUser(user: User, newUserValue: UserEdit) {
+    this.userService.editUser(user, newUserValue).pipe(take(1))
+      .subscribe({
+        next: (user: User) => {
+          const allUsersCurrentValue = this.allUsers.getValue();
+          let allUsersCurrentValueUpdated = allUsersCurrentValue.filter(x => x.id !== user.id);
+          allUsersCurrentValueUpdated = [...allUsersCurrentValueUpdated, user];
+          this.allUsers.next(allUsersCurrentValueUpdated);
+
+        }
+      });
   }
 }

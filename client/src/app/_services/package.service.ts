@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class PackageService {
   private baseUrl: string = 'https://localhost:5001/api';
   private allPackages = new BehaviorSubject<Package[]>([]);
+
   allPackages$ = this.allPackages.asObservable();
 
   constructor(

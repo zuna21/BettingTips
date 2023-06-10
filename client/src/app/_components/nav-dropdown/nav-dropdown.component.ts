@@ -37,6 +37,12 @@ export class NavDropdownComponent implements OnInit {
     this.loadPackages();
   }
 
+  public setUserPackage(userPackage: Package) {
+    const newUserPackages: Package[] = [];
+    newUserPackages.push(userPackage);
+    this.userPackages.next(newUserPackages);
+  }
+
   loadPackages() {
     this.packageService.getUserPackages()
       .pipe(take(1))
