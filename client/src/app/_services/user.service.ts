@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { User } from '../_interfaces/user';
 import { UserEdit } from '../_interfaces/userEdit';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { UserEdit } from '../_interfaces/userEdit';
 export class UserService {
   private http: HttpClient = inject(HttpClient);
 
-  private baseUrl: string = 'https://localhost:5001/api';
+  private baseUrl: string = environment.apiUrl;
 
   public getAllUsers() {
     return this.http.get<User[]>(`${this.baseUrl}/user/getAllUsers`);

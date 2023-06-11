@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Tip } from '../_interfaces/tip';
 import { TipCreate } from '../_interfaces/tipCreate';
 import { Photo } from '../_interfaces/photo';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipService {
-  private baseUrl: string = 'https://localhost:5001/api';
+  private baseUrl: string = environment.apiUrl;
 
   constructor(
     private http: HttpClient

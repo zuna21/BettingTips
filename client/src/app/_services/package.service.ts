@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Package } from '../_interfaces/package';
 import { PackageCreate } from '../_interfaces/packageCreate';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PackageService {
-  private baseUrl: string = 'https://localhost:5001/api';
+  private baseUrl: string = environment.apiUrl;
   private allPackages = new BehaviorSubject<Package[]>([]);
 
   allPackages$ = this.allPackages.asObservable();

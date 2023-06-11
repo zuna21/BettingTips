@@ -5,12 +5,13 @@ import { User } from '../_interfaces/user';
 import { BehaviorSubject } from 'rxjs';
 import { UserCreate } from '../_interfaces/userCreate';
 import { Package } from '../_interfaces/package';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  private baseUrl: string = 'https://localhost:5001/api';
+  private baseUrl: string = environment.apiUrl;
   private user = new BehaviorSubject<User | null>(null);
   user$ = this.user.asObservable();
 
