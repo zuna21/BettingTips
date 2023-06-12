@@ -13,6 +13,8 @@ import { UsersComponent } from './users/users.component';
 import { WaitingComponent } from './waiting/waiting.component';
 import { authGuard } from './_guards/auth.guard';
 import { adminGuard } from './_guards/admin.guard';
+import { NotFoundComponent } from './_components/not-found/not-found.component';
+import { ServerErrorComponent } from './_components/server-error/server-error.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -39,6 +41,9 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'not-found', component: NotFoundComponent},
+  { path: 'server-error', component: ServerErrorComponent },
+  { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

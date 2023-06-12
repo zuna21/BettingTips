@@ -33,6 +33,9 @@ import { LoadingSpinnerComponent } from './_components/loading-spinner/loading-s
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { ConfirmationsDialogComponent } from './_components/confirmations-dialog/confirmations-dialog.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { NotFoundComponent } from './_components/not-found/not-found.component';
+import { ServerErrorComponent } from './_components/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +61,8 @@ import { ToastrModule } from 'ngx-toastr';
     EditUserDialogComponent,
     LoadingSpinnerComponent,
     ConfirmationsDialogComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +78,8 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
