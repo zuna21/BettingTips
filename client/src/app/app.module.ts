@@ -32,6 +32,7 @@ import { EditUserDialogComponent } from './_components/edit-user-dialog/edit-use
 import { LoadingSpinnerComponent } from './_components/loading-spinner/loading-spinner.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { ConfirmationsDialogComponent } from './_components/confirmations-dialog/confirmations-dialog.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,10 @@ import { ConfirmationsDialogComponent } from './_components/confirmations-dialog
     HttpClientModule,
     ReactiveFormsModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-center'
+    })
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

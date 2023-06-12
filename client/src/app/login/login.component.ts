@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -10,9 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
   private router: Router = inject(Router);
   private accountService: AccountService = inject(AccountService);
+  private toastr: ToastrService = inject(ToastrService);
+  
+  loginForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +40,7 @@ export class LoginComponent implements OnInit {
         next: user => {
           this.accountService.setUser(user);
           localStorage.setItem('userToken', JSON.stringify(user.token));
+          this.toastr.success(`Welcome ${this.accountService.getUser().username}`);
           this.router.navigateByUrl('/home');
         }
       });
