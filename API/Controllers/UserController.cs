@@ -72,7 +72,7 @@ namespace API.Controllers
             if (user == null) return NotFound();
             user.HasSubscription = true;
             user.StartDate = DateTime.UtcNow;
-            user.EndDate = DateTime.UtcNow.AddSeconds(user.Package.ActiveDays);
+            user.EndDate = DateTime.UtcNow.AddDays(user.Package.ActiveDays);
             if (await _userRepository.SaveAllAsync()) return _mapper.Map<UserDto>(user);
             return BadRequest("Failed to approve user.");
         }
