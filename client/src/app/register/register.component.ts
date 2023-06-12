@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
     email: '',
     password: '',
     package: null
-  }
+  };
+  selectedIndex: number | undefined;
 
   ngOnInit(): void {
     if (this.accountService.getUser()) this.router.navigateByUrl('/home');
@@ -51,6 +52,7 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     if (this.registerUserForm.invalid) return;
+    if (this.selectedIndex === undefined) return;
     this.userToRegister.username = this.registerUserForm.value.username;
     this.userToRegister.email = this.registerUserForm.value.email;
     this.userToRegister.password = this.registerUserForm.value.password;
@@ -65,9 +67,11 @@ export class RegisterComponent implements OnInit {
       })
   }
 
-  onSelectPackage(e, packageSelected: Package) {
-    if (e.target.checked)
-      this.userToRegister.package = packageSelected;
+
+
+  changeSelection(e, index) {
+    this.selectedIndex = e.target.checked ? index : undefined;
+    this.userToRegister.package = this.packages[this.selectedIndex];
   }
 
 }

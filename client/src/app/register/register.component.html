@@ -17,17 +17,17 @@
             <div>
                 <label>Select your package: </label>
                 <div class="packages">
-                    <ng-container  *ngFor="let package of packages">
+                    <ng-container  *ngFor="let package of packages; let index = index">
                         <div class="package-wrapper">
                             {{ package.name }}
                             {{ package.activeDays }} days
-                            <input type="checkbox" (click)="onSelectPackage($event, package)" />
+                            <input type="checkbox" [checked]="selectedIndex === index" (change)="changeSelection($event, index)" />
                         </div>
                     </ng-container>
                 </div>
             </div>
             <div>
-                <button type="submit" [disabled]="registerUserForm.invalid">Register</button>
+                <button type="submit" [disabled]="registerUserForm.invalid || selectedIndex === undefined">Register</button>
             </div>
             <div>Already have an account? <a routerLink="/login">Login</a></div>
         </form>
