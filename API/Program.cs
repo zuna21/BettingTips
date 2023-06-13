@@ -53,4 +53,6 @@ app.UseStaticFiles();
 
 app.MapControllers();
 
+app.MapFallbackToController("Index", "Fallback");
+
 app.Run();

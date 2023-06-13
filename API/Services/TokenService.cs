@@ -12,7 +12,6 @@ namespace API.Services
         private readonly SymmetricSecurityKey _key;
         public TokenService(IConfiguration config)
         {
-            Console.WriteLine(config["TokenKey"]);
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
         public string CreateToken(AppUser user, bool isAdmin, bool hasSubscription)
