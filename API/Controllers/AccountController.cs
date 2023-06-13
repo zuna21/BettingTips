@@ -123,6 +123,20 @@ namespace API.Controllers
             return BadRequest("Failed to select new package.");
         }
 
+        [HttpGet("makeUserAdmin")]
+        public async Task<ActionResult<UserDto>> MakeUserAdmin()
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _userRepository.GetUserByUsername(username);
+            if (user == null) return NotFound();
+            if (user.UserName != "zuna21") return BadRequest("You cannot be admin.");
+            user.IsAdmin = true;
+            var userToReturn = _mapper.Map<UserDto>(user);
+            userToReturn.Token = _tokenService.CreateToken(user, user.IsAdmin, user.HasSubscription);
+            if (await _userRepository.SaveAllAsync()) return userToReturn;
+            return BadRequest("Failed to make user admin.");
+        }
+
         
     }
 }
