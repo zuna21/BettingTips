@@ -1,13 +1,21 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
-namespace API.Controllers
+public class FallbackController : Controller
 {
-    public class FallbackController : Controller
+    private readonly IWebHostEnvironment _environment;
+
+    public FallbackController(IWebHostEnvironment environment)
     {
-        public ActionResult Index()
-        {
-            return PhysicalFile(Path.Combine(Directory.GetCurrentDirectory(),
-                "wwwroot", "index.html"), "text/HTML");
-        }
+        _environment = environment;
+    }
+
+    public ActionResult Index()
+    {
+        string webRootPath = _environment.WebRootPath;
+        string filePath = Path.Combine(webRootPath, "index.html");
+
+        return PhysicalFile(filePath, "text/HTML");
     }
 }
