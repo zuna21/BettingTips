@@ -50,11 +50,8 @@ app.UseCors(x => x.AllowAnyHeader()
     .AllowCredentials()
     .WithOrigins("http://localhost:4200"));
 
-app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapControllers();
-
-app.MapFallbackToController("Index", "Fallback");
 
 app.Run();
