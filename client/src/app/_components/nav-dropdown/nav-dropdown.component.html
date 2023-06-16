@@ -1,25 +1,17 @@
-<div class="dropdown-wrapper" (click)="onOpenDropdown()">
-    <app-dropdown-svg></app-dropdown-svg>
-</div>
-<div class="list-wrapper" *ngIf="isDropdownOpen && (accountService.user$ | async)">
-    <div class="item" routerLink="/home">Home</div>
-    <div class="item" (click)="onEditProfile()">Edit Profile</div>
-    <div class="item" routerLink="/package-list">Packages</div>
-    <div class="item" (click)="onOpenTips()">
-        <div class="iq200">
-            <div>
-                <app-down-arrow-svg></app-down-arrow-svg>
-            </div>
-            <div>Tips</div>
-        </div>
-        <div class="tips-wrapper" *ngIf="isTipsOpen">
-            <ng-container *ngFor="let package of (userPackages$ | async)">
-                <div routerLink="/tips/{{package.id}}">{{ package.name }}</div>
-            </ng-container>
-        </div>
-    </div>
-    <div class="item" routerLink="/contact">Contact</div>
-    <div class="item" *ngIf="(accountService.user$ | async).isAdmin" routerLink="/admin/create">Create</div>
-    <div class="item" *ngIf="(accountService.user$ | async).isAdmin" routerLink="/admin">Users</div>
-    <div class="item" (click)="onLogOut()">Log out</div>
+<div class="dropdown-wrapper">
+        <app-dropdown-svg mat-button [matMenuTriggerFor]="beforeMenu"></app-dropdown-svg>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item routerLink="/home">Home</button>
+      <button mat-menu-item (click)="onEditProfile()">Edit Profile</button>
+      <button mat-menu-item routerLink="/package-list">Packages</button>
+      <ng-container *ngFor="let package of (userPackages$ | async)">
+        <button mat-menu-item class="tips" routerLink="/tips/{{package.id}}">
+            <mat-icon>card_giftcard</mat-icon> {{ package.name }}
+        </button>
+      </ng-container>
+      <button mat-menu-item routerLink="/contact">Contact</button>
+      <button mat-menu-item *ngIf="(accountService.user$ | async).isAdmin" routerLink="/admin/create">Create</button>
+      <button mat-menu-item *ngIf="(accountService.user$ | async).isAdmin" routerLink="/admin">Users</button>
+      <button mat-menu-item (click)="onLogOut()">Log Out</button>
+    </mat-menu>
 </div>

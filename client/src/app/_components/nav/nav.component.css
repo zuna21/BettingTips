@@ -1,13 +1,14 @@
 .nav-wrapper {
     display: flex;
-    background: black;
+    background: darkslategrey;
     color: wheat;
-    height: 2rem;
+    height: 3rem;
     align-items: center;
     justify-content: space-around;
 }
 
 .dropdown {
-    height: 90%;
+    height: 50%;
     width: 3rem;
+
 }

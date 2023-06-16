@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BehaviorSubject, take } from 'rxjs';
@@ -24,14 +24,6 @@ export class NavDropdownComponent implements OnInit {
 
   private userPackages = new BehaviorSubject<Package[]>([]);
   userPackages$ = this.userPackages.asObservable();
-  isTipsOpen: boolean = false;
-  isDropdownOpen: boolean = false;
-
-
-
-  constructor(
-    private elementRef: ElementRef,
-  ) {}
 
   ngOnInit(): void {
     this.loadPackages();
@@ -51,22 +43,7 @@ export class NavDropdownComponent implements OnInit {
       });
   }
 
-  onOpenTips() {
-    this.isTipsOpen = !this.isTipsOpen;
-  }
 
-  onOpenDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
-  }
-
-  @HostListener('document:mousedown', ['$event'])
-  onGlobalClick(event): void {
-     if (!this.elementRef.nativeElement.contains(event.target)) {
-        // clicked outside => close dropdown list
-     this.isDropdownOpen = false;
-     this.isTipsOpen = false;
-     }
-  }
 
   onLogOut() {
     this.accountService.setUser(null);
