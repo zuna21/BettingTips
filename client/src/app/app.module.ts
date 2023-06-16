@@ -37,6 +37,10 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './_components/not-found/not-found.component';
 import { ServerErrorComponent } from './_components/server-error/server-error.component';
 
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,9 +76,12 @@ import { ServerErrorComponent } from './_components/server-error/server-error.co
     ReactiveFormsModule,
     MatExpansionModule,
     MatDialogModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-center'
-    })
+    }),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

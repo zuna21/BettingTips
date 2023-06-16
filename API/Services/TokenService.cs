@@ -12,8 +12,9 @@ namespace API.Services
         private readonly SymmetricSecurityKey _key;
         public TokenService(IConfiguration config)
         {
-            Console.WriteLine(config["TokenKey"]);
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                Environment.GetEnvironmentVariable("TokenKeyBettingMasterAdvice")
+            ));
         }
         public string CreateToken(AppUser user, bool isAdmin, bool hasSubscription)
         {
@@ -29,7 +30,7 @@ namespace API.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds
             };
 

@@ -14,7 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt =>
 {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseNpgsql(
+        Environment.GetEnvironmentVariable("ConnectionStringBettingMasterAdvice")
+    );
 });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -23,7 +25,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])
+                        Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("TokenKeyBettingMasterAdvice"))
                     ),
             ValidateIssuer = false,
             ValidateAudience = false
@@ -45,10 +47,8 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(x => x.AllowAnyHeader()
     .AllowAnyMethod()
-    .AllowCredentials()
-    .WithOrigins("http://localhost:4200"));
+    .AllowAnyOrigin());
 
-app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapControllers();
