@@ -47,8 +47,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(x => x.AllowAnyHeader()
     .AllowAnyMethod()
-    .AllowCredentials()
-    .WithOrigins("http://localhost:4200"));
+    .AllowAnyOrigin());
 
 app.UseStaticFiles();
 
