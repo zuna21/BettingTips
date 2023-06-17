@@ -1,10 +1,15 @@
 .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     background: darkslategrey;
     color: wheat;
     height: 3rem;
     align-items: center;
     justify-content: space-around;
+    z-index: 1;
 }
 
 .dropdown {

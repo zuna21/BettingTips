@@ -40,6 +40,11 @@ import { ServerErrorComponent } from './_components/server-error/server-error.co
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDividerModule} from '@angular/material/divider';
+
+
 
 @NgModule({
   declarations: [
@@ -79,6 +84,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-center'
     }),

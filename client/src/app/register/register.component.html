@@ -3,31 +3,44 @@
         <form class="form-wrapper" [formGroup]="registerUserForm" (ngSubmit)="onRegister()">
             <h1>REGISTER</h1>
             <div>
-                <label>Username: </label>
-                <input type="text" formControlName="username" />
+                <mat-form-field class="example-full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
             </div>
             <div>
-                <label>Email: </label>
-                <input type="email" formControlName="email" />
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email">
+                </mat-form-field>
             </div>
             <div>
-                <label>Password: </label>
-                <input type="password" formControlName="password" />
+                <mat-form-field class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" type="password">
+                </mat-form-field>
             </div>
-            <div>
-                <label>Select your package: </label>
-                <div class="packages">
-                    <ng-container  *ngFor="let package of packages; let index = index">
-                        <div class="package-wrapper">
-                            {{ package.name }}
-                            {{ package.activeDays }} days
-                            <input type="checkbox" [checked]="selectedIndex === index" (change)="changeSelection($event, index)" />
+            <div class="packages-pannel">
+                <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Select your package:
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                        <div class="packages-wrapper">
+                            <ng-container *ngFor="let package of packages; let index = index">
+                                <div class="package-wrapper">
+                                    <div>{{ package.name }}</div>
+                                    <div>{{ package.activeDays }} days active</div>
+                                    <div>${{ package.price }}</div>
+                                    <input type="checkbox" [checked]="selectedIndex === index" (change)="changeSelection($event, index)" />
+                                </div>
+                            </ng-container>
                         </div>
-                    </ng-container>
-                </div>
+                  </mat-expansion-panel>
             </div>
-            <div>
-                <button type="submit" [disabled]="registerUserForm.invalid || selectedIndex === undefined">Register</button>
+            <div style="margin-bottom: 1rem;">
+                <button mat-raised-button type="submit" [disabled]="registerUserForm.invalid || selectedIndex === undefined" color="primary">Register</button>
             </div>
             <div>Already have an account? <a routerLink="/login">Login</a></div>
         </form>

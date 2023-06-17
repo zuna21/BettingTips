@@ -1,17 +1,16 @@
 .login-wrapper {
-    background: aliceblue;
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .login-card {
-    background-color: bisque;
-    border: 2px solid tomato;
+    background: var(--gold);
+    color: var(--dark-green);
+    border: 2px solid var(--purple);
     height: 70%;
     width: 80%;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 2rem;
 }
 
@@ -20,9 +19,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
 }
 
-input {
-    padding-left: 0.5rem;
+.button-wrapper {
+    margin-bottom: 2rem;
 }

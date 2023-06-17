@@ -2,19 +2,23 @@
     <div class="login-card">
         <form class="form-wrapper" [formGroup]="loginForm" (ngSubmit)="onLogin()">
             <div>
-                <h1>LOGIN</h1>
+                <h1>Welcome</h1>
             </div>
             <div>
-                <label>Username: </label>
-                <input type="text" formControlName="username">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
             </div>
             <div>
-                <label>Password: </label>
-                <input type="password" formControlName="password" />
+                <mat-form-field class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password">
+                </mat-form-field>
             </div>
-            <div>
-                <button type="submit">Login</button>
-            </div>
+            <div class="button-wrapper">
+                    <button [disabled]="loginForm.invalid" mat-raised-button type="submit" color="primary">Login</button>
+                </div>
             <div>
                 <p>Don't have an account <a routerLink="/register">register</a></p>
             </div>

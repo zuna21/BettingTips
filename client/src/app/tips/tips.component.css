@@ -1,6 +1,4 @@
 .main-container {
-    background: darkcyan;
-    height: 100vh;
     display: flex;
     gap: 5rem;
     flex-direction: column;

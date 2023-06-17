@@ -1,5 +1,4 @@
 .main-container {
-    background: cornflowerblue;
     display: flex;
     flex-direction: column;
     padding: 2rem;
