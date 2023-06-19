@@ -1,10 +1,11 @@
 .main-container {
   padding: 1rem;
-  border: 3px solid tomato;
+  border: 3px solid var(--purple);
   display: flex;
   gap: 1rem;
   flex-direction: column;
   background: aliceblue;
+  border-radius: 5px;
 }
 
 .main-container > div:first-child {
@@ -27,5 +28,5 @@
 
 .active-days {
   font-weight: 400;
-  color: coral;
+  color: var(--purple);
 }

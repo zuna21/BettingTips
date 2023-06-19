@@ -8,11 +8,29 @@
   <hr />
   <div>
     <div>${{ package.price }}</div>
-    <button (click)="onSelect()" type="button">
+    <!-- <button (click)="onSelect()" type="button">
       {{ "Select" | uppercase }}
+    </button> -->
+
+    <button
+      mat-raised-button
+      type="button"
+      (click)="onSelect()"
+      color="primary"
+    >
+      Select
     </button>
-    <button *ngIf="canDelete" type="button" (click)="onDelete()">
+    <!-- <button *ngIf="canDelete" type="button" (click)="onDelete()">
       {{ "Delete" | uppercase }}
+    </button> -->
+
+    <button
+      mat-raised-button
+      type="button"
+      (click)="onDelete()"
+      color="warn"
+    >
+      Delete
     </button>
   </div>
 </div>
