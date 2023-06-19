@@ -49,8 +49,6 @@ app.UseCors(x => x.AllowAnyHeader()
     .AllowAnyMethod()
     .AllowAnyOrigin());
 
-app.UseStaticFiles();
-
 app.MapControllers();
 
 app.Run();

@@ -107,7 +107,7 @@ namespace API.Controllers
 
         private bool DeletePhotoFromServerFolder(string photoName)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", photoName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", photoName);
 
             if (System.IO.File.Exists(filePath))
             {

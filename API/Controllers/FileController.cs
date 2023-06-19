@@ -31,7 +31,7 @@ namespace API.Controllers
                 if (file.Length > 0)
                 {
                     var fileName = Path.GetFileName(file.FileName);
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
                     var photoCreate = new PhotoCreateDto
                     {
                         Name = fileName,
@@ -63,7 +63,7 @@ namespace API.Controllers
         {
             try
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
 
                 if (System.IO.File.Exists(filePath))
                 {
