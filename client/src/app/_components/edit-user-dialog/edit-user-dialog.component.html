@@ -3,21 +3,24 @@
     <div>
         <form class="form-container" [formGroup]="editUserForm" (ngSubmit)="save()">
             <div>
-                <label>Username: </label>
-                <input type="text" formControlName="username" />
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Username" formControlName="username">
+                </mat-form-field>
             </div>
             <div>
-                <label>Email: </label>
-                <input type="email" formControlName="email" />
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Email" type="email" formControlName="email">
+                </mat-form-field>
             </div>
             <div>
-                <label>New Password: </label>
-                <input type="password" formControlName="password" />
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Password" type="password" formControlName="password">
+                </mat-form-field>
             </div>
 
             <div class="btn-container">
-                <button type="submit" [disabled]="editUserForm.invalid">Save</button>
-                <button type="button" (click)="close()">Cancel</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="editUserForm.invalid">Save</button>
+                <button mat-raised-button color="warn" (click)="close()" type="button">Cancel</button>
             </div>
         </form>
     </div>

@@ -1,15 +1,17 @@
 <div *ngIf="user" class="main-container" [ngClass]="{'has-subscription': user.hasSubscription}">
-    <div>
-        <div>{{ user.username }}</div>
-        <div class="email">{{ user.email }}</div>
-    </div>
-    <div>
-        <div>{{ user.package.name }}</div>
-        <div>${{ user.package.price }}</div>
+    <div class="detail-wrapper">
+        <div>
+            <div>{{ user.username }}</div>
+            <div class="email">{{ user.email }}</div>
+        </div>
+        <div>
+            <div>{{ user.package.name }}</div>
+            <div>${{ user.package.price }}</div>
+        </div>
     </div>
     <div class="buttons-wrapper">
-        <button *ngIf="!user.hasSubscription" (click)="onApproveUser()">Approve</button>
-        <button (click)="onEditUser()">Edit User</button>
-        <button (click)="onDeleteUser()">Delete</button>
+        <button mat-raised-button *ngIf="!user.hasSubscription" (click)="onApproveUser()" color="primary">Approve</button>
+        <button mat-raised-button (click)="onEditUser()" color="accent">Edit User</button>
+        <button mat-raised-button (click)="onDeleteUser()" color="warn">Delete</button>
     </div>
 </div>

@@ -14,7 +14,7 @@
         <img class="tip-photo" src="https://www.betmasteradvice.com/images/{{tip.photo.name}}" alt="{{tip.photo.name}}">
       </div>
       <div *ngIf="canEdit">
-        <button (click)="onDeleteTip()">Delete</button>
+        <button mat-raised-button color="warn" (click)="onDeleteTip()">Delete</button>
       </div>
     </div>
   </mat-expansion-panel>

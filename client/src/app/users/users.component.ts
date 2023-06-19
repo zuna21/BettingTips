@@ -65,10 +65,8 @@ export class UsersComponent implements OnInit {
   upprovedUser(user: User) {
     this.userService.approveUser(user).pipe(take(1))
       .subscribe({
-        next: successUser => {
-          const currentUsers = this.selectedUsers.getValue();
-          const updatedUsers = currentUsers.filter(x => x.id !== successUser.id);
-          this.selectedUsers.next(updatedUsers);
+        next: _ => {
+          this.loadUsers()
         }
       });
   }

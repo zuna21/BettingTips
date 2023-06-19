@@ -1,9 +1,12 @@
 <div class="main-container">
     <div class="title">Users</div>
     <div class="btn-container">
-        <button (click)="onAllUsers()">All Users</button>
+        <!-- <button (click)="onAllUsers()">All Users</button>
         <button (click)="onSubscribedUsers()">Subscribed Users</button>
-        <button (click)="onUnsubscribedUsers()">Unsubscribed Users</button>
+        <button (click)="onUnsubscribedUsers()">Unsubscribed Users</button> -->
+        <button mat-raised-button (click)="onAllUsers()" color="primary">All Users</button>
+        <button mat-raised-button (click)="onSubscribedUsers()" color="primary">Subscribed Users</button>
+        <button mat-raised-button (click)="onUnsubscribedUsers()" color="primary">Unsubscribed Uses</button>
     </div>
     <div class="users-container">
         <ng-container *ngFor="let user of (selectedUsers$ | async)">
