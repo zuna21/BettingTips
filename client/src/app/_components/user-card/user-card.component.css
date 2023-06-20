@@ -22,6 +22,8 @@
 .buttons-wrapper {
     display: flex;
     gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .detail-wrapper {

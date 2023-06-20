@@ -1,49 +1,85 @@
 <div class="main-container">
-    <div class="title">Create tip</div>    
-    <button [disabled]="(tips$ | async).length === 0" (click)="deleteAllTips()">Delete All tips</button>
-    <div class="tip-container">
-        <ng-container *ngFor="let tip of (tips$ | async)">
-            <app-tip-panel
-                [tip]="tip"
-                [canEdit]="true"
-                (deleteTip)="onDeleteTip($event)"
-            >
-            </app-tip-panel>
-        </ng-container>
-    </div>
+  <div class="title">Create tip</div>
+  <button
+    mat-raised-button
+    color="warn"
+    type="button"
+    [disabled]="(tips$ | async).length === 0"
+    (click)="deleteAllTips()"
+  >
+    Delete All Tips
+  </button>
+  <div class="tip-container">
+    <ng-container *ngFor="let tip of tips$ | async">
+      <app-tip-panel
+        [tip]="tip"
+        [canEdit]="true"
+        (deleteTip)="onDeleteTip($event)"
+      >
+      </app-tip-panel>
+    </ng-container>
+  </div>
 
-    <form [formGroup]="createTipForm" (ngSubmit)="onSubmitForm()" enctype="multipart/form-data">
-        <div>
-            <div class="image-upload-container">
-                <label>Insert your image: </label>
-                <input type="file" (change)="selectFileToUpload($event)">
-                <button (click)="uploadFile()" [disabled]="!selectedFile">Upload your image</button>
-            </div>
-            <div class="input-container">
-                <label>Home Team: </label>
-                <input type="text" formControlName="homeTeam" />
-            </div>
-            <div class="input-container">
-                <label>Away Team: </label>
-                <input type="text" formControlName="awayTeam" />
-            </div>
-            <div class="checkbox-container">
-                <ng-container
-                    *ngFor="let package of (packageService.allPackages$ | async)"
-                >
-                    <div>
-                        <label>{{package.name}}</label>
-                        <input 
-                            (click)="onCheckPackage($event, package)"
-                            type="checkbox">
-                    </div>
-                </ng-container>
-            </div>
-
-            <button
-                [disabled]="createTipForm.invalid || selectedPackages.length === 0 || !tipToCreate.photo"
-            >Create tip</button>
+  <form
+    [formGroup]="createTipForm"
+    (ngSubmit)="onSubmitForm()"
+    enctype="multipart/form-data"
+  >
+    <div>
+      <div class="image-upload-container">
+        <label>Insert your image: </label>
+        <input type="file" (change)="selectFileToUpload($event)" />
+        <button
+          mat-raised-button
+          type="button"
+          (click)="uploadFile()"
+          [disabled]="!selectedFile"
+          color="accent"
+        >
+          Upload your image
+        </button>
+        <div *ngIf="tipToCreate.photo">
+          <img
+            class="tip-photo"
+            src="https://www.betmasteradvice.com/images/{{tipToCreate.photo.name}}"
+            alt="{{tipToCreate.photo.name}}"
+          />
         </div>
-    </form>
-
+      </div>
+      <div class="input-container">
+        <mat-form-field class="example-full-width">
+          <mat-label>Home Team: </mat-label>
+          <input matInput formControlName="homeTeam" />
+        </mat-form-field>
+      </div>
+      <div class="input-container">
+        <mat-form-field class="example-full-width">
+          <mat-label>Away Team: </mat-label>
+          <input matInput formControlName="awayTeam" />
+        </mat-form-field>
+      </div>
+      <div class="checkbox-container">
+        <ng-container
+          *ngFor="let package of packageService.allPackages$ | async"
+        >
+          <div>
+            <label>{{ package.name }}</label>
+            <input (click)="onCheckPackage($event, package)" type="checkbox" />
+          </div>
+        </ng-container>
+      </div>
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="
+          createTipForm.invalid ||
+          selectedPackages.length === 0 ||
+          !tipToCreate.photo
+        "
+        color="primary"
+      >
+        Create Tip
+      </button>
+    </div>
+  </form>
 </div>
