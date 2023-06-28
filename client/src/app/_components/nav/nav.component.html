@@ -1,11 +1,9 @@
 <div class="nav-wrapper">
-    <div class="logo">
-        Logo
-    </div>
-    <div class="title">
-        Bet Master Advice
-    </div>
-    <div class="dropdown" *ngIf="(accountService.user$ | async)">
-        <app-nav-dropdown></app-nav-dropdown>
-    </div>
+  <div class="logo">
+    <app-logo></app-logo>
+  </div>
+  <div class="title">Bet Master Advice</div>
+  <div class="dropdown" *ngIf="accountService.user$ | async">
+    <app-nav-dropdown></app-nav-dropdown>
+  </div>
 </div>

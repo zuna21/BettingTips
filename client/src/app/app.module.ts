@@ -43,6 +43,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
+import { LogoComponent } from './_components/svg/logo/logo.component';
 
 
 
@@ -72,6 +73,7 @@ import {MatDividerModule} from '@angular/material/divider';
     ConfirmationsDialogComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
