@@ -1,0 +1,6 @@
+.text-wrapper {
+    background-color: var(--white);
+    border: 2px solid var(--orange);
+    padding: 1rem;
+    border-radius: 5px;
+}
